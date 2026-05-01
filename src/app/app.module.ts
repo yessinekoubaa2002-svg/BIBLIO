@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 
 // interceptor
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { UserManagementComponent } from './features/admin/user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
     UserDashboardComponent,
     DashboardComponent,
     BookListComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,

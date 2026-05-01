@@ -27,4 +27,7 @@ export class AdminService {
   getStats(): Observable<DashboardResponse> {
     return this.http.get<DashboardResponse>(`${this.api}/stats`);
   }
+  getRolesStats(): Observable<any> {
+  return this.http.get<any>('http://localhost:8081/admins/dashboard/roles');
+}
 }

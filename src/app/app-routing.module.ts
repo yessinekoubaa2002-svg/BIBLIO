@@ -8,7 +8,10 @@ import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-
 import { UserDashboardComponent } from './features/user/user-dashboard/user-dashboard.component';
 import { DashboardComponent } from './features/bibliothecaire/dashboard/dashboard.component';
 import { BookListComponent } from './features/books/book-list/book-list.component';
+import { UserManagementComponent } from './features/admin/user-management/user-management.component';
 
+
+  
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -16,7 +19,10 @@ const routes: Routes = [
   { path: 'user', component: UserDashboardComponent },
   { path: 'biblio', component: DashboardComponent },
   { path: 'books', component: BookListComponent },
-  { path: '**', redirectTo: '' }
+  { path: 'register', component: RegisterComponent },
+  { path: '**', redirectTo: '' },
+  {path: 'users-management',component: UserManagementComponent}
+
 ];
 
 @NgModule({
