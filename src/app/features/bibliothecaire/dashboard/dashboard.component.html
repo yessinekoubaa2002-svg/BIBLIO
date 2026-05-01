@@ -1,1 +1,36 @@
-<p>dashboard works!</p>
+<div class="container mt-4">
+
+  <h2>📚 Bibliothécaire Dashboard</h2>
+
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Livre</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let e of emprunts">
+        <td>{{e.user.username}}</td>
+        <td>{{e.livre.titre}}</td>
+        <td>{{e.status}}</td>
+
+        <td>
+          <button class="btn btn-success btn-sm"
+                  (click)="valider(e.id)">
+            Valider
+          </button>
+
+          <button class="btn btn-warning btn-sm ms-2"
+                  (click)="retour(e.id)">
+            Retour
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

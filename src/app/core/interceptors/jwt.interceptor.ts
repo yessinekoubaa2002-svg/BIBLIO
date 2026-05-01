@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const clone = req.clone({
+        headers: req.headers.set('Authorization', 'Bearer ' + token)
+      });
+      return next.handle(clone);
+    }
+
+    return next.handle(req);
   }
 }
