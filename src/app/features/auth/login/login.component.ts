@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,33 +9,70 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  form:any = {
-    username: '',
-    password: ''
+  mode: 'login' | 'register' = 'login';
+
+  loginForm = {
+    email: '',
+    motDePasse: ''
   };
 
-  constructor(private auth: AuthService, private router: Router) {}
+  registerForm = {
+  nom: '',
+  prenom: '',
+  email: '',
+  motDePasse: '',
+  telephone: '',
+  matricule: '',
+  salaire: 0
+};
 
-  login(){
-    this.auth.login(this.form).subscribe((res:any) => {
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-      console.log("LOGIN RESPONSE:", res);
+  login() {
+    this.authService.login(this.loginForm).subscribe({
+      next: (res: any) => {
+        console.log("LOGIN OK", res);
 
-      this.auth.saveToken(res.token);
-      this.auth.saveRole(res.role);
+        this.authService.saveToken(res.token);
+        this.authService.saveRole(res.role);
 
-      if(res.role === "ADMIN"){
-        this.router.navigate(['/admin']);
+        if (res.role === 'ADMIN') {
+          this.router.navigate(['/admin']);
+        } else if (res.role === 'BIBLIOTHECAIRE') {
+          this.router.navigate(['/biblio']);
+        } else {
+          this.router.navigate(['/user']);
+        }
+      },
+      error: (err) => {
+        console.error("LOGIN ERROR", err);
       }
-      else if(res.role === "BIBLIOTHECAIRE"){
-        this.router.navigate(['/biblio']);
-      }
-      else {
-        this.router.navigate(['/user']);
-      }
-
-    }, err => {
-      console.error("LOGIN ERROR:", err);
     });
   }
+
+  selectedRole: string = '';
+
+register() {
+  if (this.selectedRole === 'ADMIN') {
+    this.authService.registerAdmin(this.registerForm).subscribe({
+      next: () => { this.mode = 'login'; this.selectedRole = ''; },
+      error: (err) => console.error("REGISTER ERROR", err)
+    });
+
+  } else if (this.selectedRole === 'BIBLIOTHECAIRE') {
+    this.authService.registerBibliothecaire(this.registerForm).subscribe({
+      next: () => { this.mode = 'login'; this.selectedRole = ''; },
+      error: (err) => console.error("REGISTER ERROR", err)
+    });
+
+  } else {
+    this.authService.registerUser(this.registerForm).subscribe({
+      next: () => { this.mode = 'login'; this.selectedRole = ''; },
+      error: (err) => console.error("REGISTER ERROR", err)
+    });
+  }
+}
 }

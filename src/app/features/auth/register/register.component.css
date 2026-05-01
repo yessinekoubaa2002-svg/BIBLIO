@@ -1,0 +1,37 @@
+.role-selector {
+  margin: 10px 0;
+}
+
+.role-selector label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.role-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.role-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.role-buttons button.active {
+  border-color: #198754;
+  background-color: #198754;
+  color: white;
+  font-weight: bold;
+}
+
+.role-buttons button:hover:not(.active) {
+  border-color: #198754;
+  color: #198754;
+}

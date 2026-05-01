@@ -10,15 +10,49 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(data:any){
+  // ================= LOGIN =================
+  login(data: any) {
     return this.http.post<any>(`${this.api}/login`, data);
   }
 
-  saveToken(token:string){
+  // ================= REGISTER USER =================
+  registerUser(data: any) {
+    return this.http.post<any>(`${this.api}/register/user`, data);
+  }
+
+  // ================= REGISTER ADMIN =================
+  registerAdmin(data: any) {
+    return this.http.post<any>(`${this.api}/register/admin`, data);
+  }
+
+  // ================= REGISTER BIBLIOTHECAIRE =================
+  registerBibliothecaire(data: any) {
+    return this.http.post<any>(`${this.api}/register/bibliothecaire`, data);
+  }
+
+  // ================= STORAGE =================
+  saveToken(token: string) {
     localStorage.setItem("token", token);
   }
 
-  saveRole(role:string){
+  saveRole(role: string) {
     localStorage.setItem("role", role);
   }
+
+  getToken(): string | null {
+  return localStorage.getItem("token");
+}
+
+getRole(): string | null {
+  return localStorage.getItem("role");
+}
+
+isLoggedIn(): boolean {
+  return !!this.getToken();
+}
+
+logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("role");
+}
 }
