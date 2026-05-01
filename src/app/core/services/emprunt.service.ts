@@ -1,22 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Emprunt } from 'src/app/models/emprunt';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class EmpruntService {
 
   private api = "http://localhost:8081/emprunts";
 
   constructor(private http: HttpClient) {}
 
-  getAll(){
-    return this.http.get<any[]>(this.api);
+  getAll(): Observable<Emprunt[]> {
+    return this.http.get<Emprunt[]>(this.api);
   }
 
-  validate(id:number){
-    return this.http.put(`${this.api}/${id}/validate`, {});
+  create(livreId: number): Observable<Emprunt> {
+    return this.http.post<Emprunt>(`${this.api}/${livreId}`, {});
   }
 
-  retour(id:number){
-    return this.http.put(`${this.api}/${id}/retour`, {});
+  validate(id: number) {
+    return this.http.put(`${this.api}/valider/${id}`, {});
+  }
+
+  retour(id: number) {
+    return this.http.put(`${this.api}/retour/${id}`, {});
   }
 }

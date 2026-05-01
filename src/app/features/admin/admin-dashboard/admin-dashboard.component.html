@@ -1,1 +1,37 @@
-<p>admin-dashboard works!</p>
+<div class="container mt-4">
+
+  <h2>👑 Admin Dashboard</h2>
+
+  <div class="row mt-4">
+
+    <div class="col-md-3">
+      <div class="card bg-primary text-white p-3">
+        <h5>Users</h5>
+        <h3>{{ stats?.totalUsers }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card bg-success text-white p-3">
+        <h5>Books</h5>
+        <h3>{{ stats?.totalBooks }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card bg-warning text-white p-3">
+        <h5>Emprunts</h5>
+        <h3>{{ stats?.totalEmprunts }}</h3>
+      </div>
+    </div>
+
+    <!-- <div class="col-md-3">
+      <div class="card bg-danger text-white p-3">
+        <h5>Overdue</h5>
+        <h3>{{ stats?.overdueBooks }}</h3>
+      </div>
+    </div> -->
+
+  </div>
+
+</div>

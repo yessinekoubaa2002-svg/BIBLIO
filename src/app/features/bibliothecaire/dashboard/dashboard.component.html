@@ -5,7 +5,6 @@
   <table class="table table-bordered mt-3">
     <thead>
       <tr>
-        <th>User</th>
         <th>Livre</th>
         <th>Status</th>
         <th>Actions</th>
@@ -14,10 +13,16 @@
 
     <tbody>
       <tr *ngFor="let e of emprunts">
-        <td>{{e.user.username}}</td>
-        <td>{{e.livre.titre}}</td>
-        <td>{{e.status}}</td>
 
+        <!-- LIVRE -->
+        <td>{{ e.livre?.titre || 'No book' }}</td>
+
+        <!-- STATUS -->
+        <td>
+          {{ e.valide ? 'VALIDÉ' : 'PENDING' }}
+        </td>
+
+        <!-- ACTIONS -->
         <td>
           <button class="btn btn-success btn-sm"
                   (click)="valider(e.id)">
@@ -29,6 +34,7 @@
             Retour
           </button>
         </td>
+
       </tr>
     </tbody>
   </table>

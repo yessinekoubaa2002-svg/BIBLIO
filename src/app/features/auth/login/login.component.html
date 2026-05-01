@@ -1,79 +1,112 @@
-<input type="text"
-       [(ngModel)]="registerForm.nom"
-       name="nom"
-       placeholder="Nom"
-       class="form-control"/><br>
+<div class="container">
 
-<input type="text"
-       [(ngModel)]="registerForm.prenom"
-       name="prenom"
-       placeholder="Prenom"
-       class="form-control"/><br>
-
-<input type="email"
-       [(ngModel)]="registerForm.email"
-       name="registerEmail"
-       placeholder="Email"
-       class="form-control"/><br>
-
-<input type="password"
-       [(ngModel)]="registerForm.motDePasse"
-       name="registerPassword"
-       placeholder="Mot de passe"
-       class="form-control"/><br>
-
-<!-- ALWAYS SHOW FOR ALL ROLES -->
-<input type="text"
-       [(ngModel)]="registerForm.telephone"
-       name="telephone"
-       placeholder="Telephone"
-       class="form-control"/><br>
-
-<!-- ONLY FOR BIBLIOTHECAIRE -->
-<ng-container *ngIf="selectedRole === 'BIBLIOTHECAIRE'">
-
-  <input type="text"
-         [(ngModel)]="registerForm.matricule"
-         name="matricule"
-         placeholder="Matricule"
-         class="form-control"/><br>
-
-  <input type="number"
-         [(ngModel)]="registerForm.salaire"
-         name="salaire"
-         placeholder="Salaire"
-         class="form-control"/><br>
-
-</ng-container>
-
-<!-- ROLE SELECTOR -->
-<div class="role-selector mb-3">
-  <label>Select Role:</label>
-  <div class="role-buttons">
-
-    <button type="button"
-            [class.active]="selectedRole === 'USER'"
-            (click)="selectedRole = 'USER'">
-      👤 User
-    </button>
-
-    <button type="button"
-            [class.active]="selectedRole === 'BIBLIOTHECAIRE'"
-            (click)="selectedRole = 'BIBLIOTHECAIRE'">
-      📚 Bibliothecaire
-    </button>
-
-    <button type="button"
-            [class.active]="selectedRole === 'ADMIN'"
-            (click)="selectedRole = 'ADMIN'">
-      🛡️ Admin
-    </button>
-
+  <!-- TOGGLE BUTTONS -->
+  <div class="mb-3">
+    <button class="btn btn-primary me-2" (click)="mode='login'">Login</button>
+    <button class="btn btn-success" (click)="mode='register'">Register</button>
   </div>
-</div>
 
-<button class="btn btn-success w-100"
-        type="submit"
-        [disabled]="!selectedRole">
-  Register as {{ selectedRole || '...' }}
-</button>
+  <!-- ================= LOGIN ================= -->
+  <form *ngIf="mode === 'login'" (ngSubmit)="login()">
+
+    <input type="text"
+           [(ngModel)]="loginForm.email"
+           name="loginEmail"
+           placeholder="Email"
+           class="form-control"/><br>
+
+    <input type="password"
+           [(ngModel)]="loginForm.motDePasse"
+           name="loginPassword"
+           placeholder="Mot de passe"
+           class="form-control"/><br>
+
+    <button class="btn btn-primary w-100" type="submit">Login</button>
+
+  </form>
+
+  <!-- ================= REGISTER ================= -->
+  <form *ngIf="mode === 'register'" (ngSubmit)="register()">
+
+    <input type="text"
+           [(ngModel)]="registerForm.nom"
+           name="nom"
+           placeholder="Nom"
+           class="form-control"/><br>
+
+    <input type="text"
+           [(ngModel)]="registerForm.prenom"
+           name="prenom"
+           placeholder="Prenom"
+           class="form-control"/><br>
+
+    <input type="email"
+           [(ngModel)]="registerForm.email"
+           name="registerEmail"
+           placeholder="Email"
+           class="form-control"/><br>
+
+    <input type="password"
+           [(ngModel)]="registerForm.motDePasse"
+           name="registerPassword"
+           placeholder="Mot de passe"
+           class="form-control"/><br>
+
+    <input type="text"
+           [(ngModel)]="registerForm.telephone"
+           name="telephone"
+           placeholder="Telephone"
+           class="form-control"/><br>
+
+    <!-- ONLY FOR BIBLIOTHECAIRE -->
+    <ng-container *ngIf="selectedRole === 'BIBLIOTHECAIRE'">
+
+      <input type="text"
+             [(ngModel)]="registerForm.matricule"
+             name="matricule"
+             placeholder="Matricule"
+             class="form-control"/><br>
+
+      <input type="number"
+             [(ngModel)]="registerForm.salaire"
+             name="salaire"
+             placeholder="Salaire"
+             class="form-control"/><br>
+
+    </ng-container>
+
+    <!-- ROLE SELECTOR -->
+    <div class="role-selector mb-3">
+      <label>Select Role:</label>
+      <div class="role-buttons">
+
+        <button type="button"
+                [class.active]="selectedRole === 'USER'"
+                (click)="selectedRole = 'USER'">
+          👤 User
+        </button>
+
+        <button type="button"
+                [class.active]="selectedRole === 'BIBLIOTHECAIRE'"
+                (click)="selectedRole = 'BIBLIOTHECAIRE'">
+          📚 Bibliothecaire
+        </button>
+
+        <button type="button"
+                [class.active]="selectedRole === 'ADMIN'"
+                (click)="selectedRole = 'ADMIN'">
+          🛡️ Admin
+        </button>
+
+      </div>
+    </div>
+
+    <button class="btn btn-success w-100"
+            type="submit"
+            [disabled]="!selectedRole">
+      Register as {{ selectedRole || '...' }}
+    </button>
+
+  </form>
+
+</div>

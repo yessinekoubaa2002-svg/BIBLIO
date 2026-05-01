@@ -7,37 +7,16 @@ import { RegisterComponent } from './features/auth/register/register.component';
 import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './features/user/user-dashboard/user-dashboard.component';
 import { DashboardComponent } from './features/bibliothecaire/dashboard/dashboard.component';
-
-import { AuthGuard } from './core/guards/auth.guard';
-import { RoleGuard } from './core/guards/role.guard';
+import { BookListComponent } from './features/books/book-list/book-list.component';
 
 const routes: Routes = [
-
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-
-  {
-    path: 'admin',
-    component: AdminDashboardComponent,
-    canActivate: [AuthGuard, RoleGuard],
-    data: { role: 'ADMIN' }
-  },
-  {
-    path: 'user',
-    component: UserDashboardComponent,
-    canActivate: [AuthGuard, RoleGuard],
-    data: { role: 'USER' }
-  },
-  {
-    path: 'biblio',
-    component: DashboardComponent,
-    canActivate: [AuthGuard, RoleGuard],
-    data: { role: 'BIBLIOTHECAIRE' }
-  },
-
-  { path: '**', redirectTo: 'login' }
+  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'user', component: UserDashboardComponent },
+  { path: 'biblio', component: DashboardComponent },
+  { path: 'books', component: BookListComponent },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

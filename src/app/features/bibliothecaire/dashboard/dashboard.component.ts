@@ -7,29 +7,47 @@ import { EmpruntService } from 'src/app/core/services/emprunt.service';
 })
 export class DashboardComponent implements OnInit {
 
-  emprunts:any[] = [];
+  emprunts: any[] = [];
 
-  constructor(private service: EmpruntService) {}
+  constructor(private empruntService: EmpruntService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.load();
   }
 
-  load(){
-    this.service.getAll().subscribe(res => {
-      this.emprunts = res;
-    });
-  }
+ load() {
+  this.empruntService.getAll().subscribe({
+    next: (data) => {
+      this.emprunts = data.map(e => ({
+        id: e.id,
+        valide: e.valide,
+        retourne: e.retourne,
+        dateEmprunt: e.dateEmprunt,
+        dateLimiteRetour: e.dateLimiteRetour,
+        livre: {
+          titre: e.livre?.titre || 'No book'
+        }
+      }));
+    }
+  });
+}
+  valider(id: number) {
+  this.empruntService.validate(id).subscribe({
+    next: () => {
+      console.log("Emprunt validé");
+      this.load(); // refresh table
+    },
+    error: (err) => console.error(err)
+  });
+}
 
-  valider(id:number){
-    this.service.validate(id).subscribe(() => {
-      this.load();
-    });
-  }
-
-  retour(id:number){
-    this.service.retour(id).subscribe(() => {
-      this.load();
-    });
-  }
+retour(id: number) {
+  this.empruntService.retour(id).subscribe({
+    next: () => {
+      console.log("Retour effectué");
+      this.load(); // refresh table
+    },
+    error: (err) => console.error(err)
+  });
+}
 }
