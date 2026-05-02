@@ -23,7 +23,8 @@ export class LoginComponent {
     motDePasse: '',
     telephone: '',
     matricule: '',
-    salaire: 0
+    salaire: 0,
+    role: ''
   };
 
   selectedRole: string = '';
@@ -33,20 +34,25 @@ export class LoginComponent {
     private router: Router
   ) {}
 
+  // ================= LOGIN =================
   login() {
+
+    console.log("LOGIN FORM SENT:", this.loginForm); // 🔥 DEBUG
+
     this.authService.login(this.loginForm).subscribe({
       next: (res: any) => {
-        console.log("LOGIN OK", res);
-        console.log("ROLE =", res.role);
+        console.log("LOGIN SUCCESS", res);
 
         this.authService.saveToken(res.token);
         this.authService.saveRole(res.role);
 
-        if (res.role === 'ROLE_ADMIN' || res.role === 'ADMIN') {
+        if (res.role === 'ADMIN' || res.role === 'ROLE_ADMIN') {
           this.router.navigate(['/admin']);
-        } else if (res.role === 'ROLE_BIBLIOTHECAIRE' || res.role === 'BIBLIOTHECAIRE') {
+        } 
+        else if (res.role === 'BIBLIOTHECAIRE') {
           this.router.navigate(['/biblio']);
-        } else if (res.role === 'ROLE_USER' || res.role === 'USER') {
+        } 
+        else {
           this.router.navigate(['/user']);
         }
       },
@@ -56,25 +62,21 @@ export class LoginComponent {
     });
   }
 
+  // ================= REGISTER =================
   register() {
-    if (this.selectedRole === 'ADMIN') {
-      this.authService.registerAdmin(this.registerForm).subscribe({
-        next: () => { this.mode = 'login'; this.selectedRole = ''; },
-        error: (err) => console.error("REGISTER ERROR", err.error)
-      });
 
-    } else if (this.selectedRole === 'BIBLIOTHECAIRE') {
-      this.authService.registerBibliothecaire(this.registerForm).subscribe({
-        next: () => { this.mode = 'login'; this.selectedRole = ''; },
-        error: (err) => console.error("REGISTER ERROR", err.error)
-      });
-
-    } else {
-      this.authService.registerUser(this.registerForm).subscribe({
-        next: () => { this.mode = 'login'; this.selectedRole = ''; },
-        error: (err) => console.error("REGISTER ERROR", err.error)
-      });
+    if (this.selectedRole) {
+      this.registerForm.role = this.selectedRole;
     }
+
+    this.authService.register(this.registerForm).subscribe({
+      next: () => {
+        console.log("REGISTER SUCCESS");
+        this.mode = 'login';
+      },
+      error: (err) => {
+        console.error("REGISTER ERROR", err);
+      }
+    });
   }
-  
 }

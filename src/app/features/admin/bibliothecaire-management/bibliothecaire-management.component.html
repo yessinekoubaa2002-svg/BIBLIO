@@ -1,0 +1,48 @@
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Bibliothecaire Management</h2>
+    <button class="btn btn-primary" routerLink="/admin/bibliothecaires/create">
+      + New Bibliothecaire
+    </button>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of bibliothecaires">
+        <td>{{ b.id }}</td>
+        <td>{{ b.nom }}</td>
+        <td>{{ b.prenom }}</td>
+        <td>{{ b.email }}</td>
+        <td>
+          <span class="badge bg-warning text-dark">
+            {{ b.role }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary me-2"
+            [routerLink]="['/admin/bibliothecaires/edit', b.id]">
+            Edit
+          </button>
+          <button class="btn btn-sm btn-outline-danger" (click)="delete(b.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="bibliothecaires.length === 0">
+        <td colspan="6" class="text-center text-muted">No bibliothecaires found.</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

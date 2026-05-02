@@ -1,0 +1,35 @@
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between mb-3">
+    <h3>Books</h3>
+    <button class="btn btn-primary" (click)="goCreate()">Add Book</button>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+        <th>Year</th>
+        <th>Qty</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let l of livres">
+        <td>{{ l.titre }}</td>
+        <td>{{ l.auteur }}</td>
+        <td>{{ l.isbn }}</td>
+        <td>{{ l.annee }}</td>
+        <td>{{ l.quantite }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="goEdit(l.id)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="delete(l.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>

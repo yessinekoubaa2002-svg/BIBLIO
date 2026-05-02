@@ -1,0 +1,43 @@
+<div class="container mt-4">
+
+  <h3>{{ isEditMode ? 'Edit Book' : 'Create Book' }}</h3>
+
+  <input class="form-control mb-2"
+         [(ngModel)]="livre.titre"
+         placeholder="Title">
+
+  <input class="form-control mb-2"
+         [(ngModel)]="livre.auteur"
+         placeholder="Author">
+
+  <input class="form-control mb-2"
+         [(ngModel)]="livre.isbn"
+         placeholder="ISBN">
+
+  <input class="form-control mb-2"
+         [(ngModel)]="livre.annee"
+         type="number"
+         placeholder="Year">
+
+  <input class="form-control mb-2"
+         [(ngModel)]="livre.quantite"
+         type="number"
+         placeholder="Quantity">
+
+  <!-- ✅ FIXED CATEGORY BINDING -->
+  <select class="form-control mb-3"
+          [(ngModel)]="livre.category.id">
+
+    <option [ngValue]="null">Select category</option>
+
+    <option *ngFor="let c of categories" [ngValue]="c.id">
+      {{ c.nom }}
+    </option>
+
+  </select>
+
+  <button class="btn btn-success" (click)="save()">
+    {{ isEditMode ? 'Update' : 'Create' }}
+  </button>
+
+</div>

@@ -1,0 +1,22 @@
+<div class="container mt-4">
+
+  <h3>{{ isEditMode ? 'Edit Bibliothecaire' : 'Create Bibliothecaire' }}</h3>
+
+  <input class="form-control mb-2" [(ngModel)]="biblio.nom" placeholder="Nom">
+  <input class="form-control mb-2" [(ngModel)]="biblio.prenom" placeholder="Prenom">
+  <input class="form-control mb-2" [(ngModel)]="biblio.email" placeholder="Email">
+  <input class="form-control mb-2" [(ngModel)]="biblio.motDePasse" placeholder="Password">
+  <input class="form-control mb-2" [(ngModel)]="biblio.telephone" placeholder="Telephone">
+  <input class="form-control mb-2" [(ngModel)]="biblio.matricule" placeholder="Matricule">
+  <input class="form-control mb-2" [(ngModel)]="biblio.salaire" placeholder="Salaire">
+
+  <div class="d-flex gap-2">
+    <button class="btn btn-success" (click)="create()">
+      {{ isEditMode ? 'Update' : 'Create' }}
+    </button>
+    <button class="btn btn-secondary" routerLink="/admin/bibliothecaires">
+      Cancel
+    </button>
+  </div>
+
+</div>

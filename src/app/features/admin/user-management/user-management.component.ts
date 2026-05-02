@@ -9,16 +9,6 @@ export class UserManagementComponent implements OnInit {
 
   users: any[] = [];
 
-  form: any = {
-    nom: '',
-    prenom: '',
-    email: '',
-    motDePasse: '',
-    telephone: ''
-  };
-
-  role = 'USER';
-
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
@@ -26,20 +16,18 @@ export class UserManagementComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userService.getAll().subscribe(res => {
-      this.users = res;
-    });
-  }
+  this.userService.getAll().subscribe({
+    next: (data: any) => {
+      this.users = data.filter((u: any) => u.role === 'USER'); // ← add this filter
+    },
+    error: (err) => console.error('ERROR loading users', err)
+  });
+}
 
-  create() {
-    if (this.role === 'USER') {
-      this.userService.createUser(this.form).subscribe(() => {
-        this.loadUsers();
-      });
-    } else {
-      this.userService.createBibliothecaire(this.form).subscribe(() => {
-        this.loadUsers();
-      });
-    }
+  deleteUser(id: number) {
+    this.userService.delete(id).subscribe({
+      next: () => this.loadUsers(),
+      error: (err) => console.error(err)
+    });
   }
 }

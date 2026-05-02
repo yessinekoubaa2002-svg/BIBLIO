@@ -17,17 +17,19 @@ export interface DashboardResponse {
 @Injectable({
   providedIn: 'root'
 })
-export class AdminService {
+export class DashboardService {
 
   private api = 'http://localhost:8081/admins/dashboard';
 
   constructor(private http: HttpClient) {}
 
   // 📊 GET DASHBOARD STATS
-  getStats(): Observable<DashboardResponse> {
-    return this.http.get<DashboardResponse>(`${this.api}/stats`);
-  }
-  getRolesStats(): Observable<any> {
-  return this.http.get<any>('http://localhost:8081/admins/dashboard/roles');
+  getStats() {
+  return this.http.get<any>('http://localhost:8081/admins/dashboard/stats');
 }
+
+  // 👥 OPTIONAL: roles stats (only if backend exists)
+  getRolesStats(): Observable<any> {
+    return this.http.get<any>(`${this.api}/roles`);
+  }
 }

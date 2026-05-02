@@ -1,0 +1,20 @@
+<div class="container mt-4">
+
+  <h2>Create User</h2>
+
+  <input [(ngModel)]="user.nom" placeholder="Nom" class="form-control mb-2">
+  <input [(ngModel)]="user.prenom" placeholder="Prenom" class="form-control mb-2">
+  <input [(ngModel)]="user.email" placeholder="Email" class="form-control mb-2">
+  <input [(ngModel)]="user.motDePasse" type="password" placeholder="Password" class="form-control mb-2">
+
+  <select [(ngModel)]="user.role" class="form-control mb-2">
+    <option value="USER">USER</option>
+    <option value="BIBLIOTHECAIRE">BIBLIOTHECAIRE</option>
+    <option value="ADMIN">ADMIN</option>
+  </select>
+
+  <button class="btn btn-success" (click)="createUser()">
+    Create
+  </button>
+
+</div>

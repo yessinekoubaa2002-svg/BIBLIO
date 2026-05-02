@@ -1,11 +1,14 @@
 <div class="container mt-4">
 
-  <h2>📚 Bibliothécaire Dashboard</h2>
+  <h2>Bibliothécaire Dashboard</h2>
 
   <table class="table table-bordered mt-3">
-    <thead>
+    <thead class="table-dark">
       <tr>
+        <th>User</th>
         <th>Livre</th>
+        <th>Date Emprunt</th>
+        <th>Date Limite</th>
         <th>Status</th>
         <th>Actions</th>
       </tr>
@@ -13,28 +16,35 @@
 
     <tbody>
       <tr *ngFor="let e of emprunts">
-
-        <!-- LIVRE -->
-        <td>{{ e.livre?.titre || 'No book' }}</td>
-
-        <!-- STATUS -->
+        <td>{{ e.user?.nom }} {{ e.user?.prenom }}</td>
+        <td>{{ e.livre?.titre }}</td>
+        <td>{{ e.dateEmprunt }}</td>
+        <td>{{ e.dateLimiteRetour }}</td>
         <td>
-          {{ e.valide ? 'VALIDÉ' : 'PENDING' }}
+          <span class="badge"
+            [ngClass]="{
+              'bg-success': e.valide && !e.retourne,
+              'bg-secondary': e.retourne,
+              'bg-warning text-dark': !e.valide && !e.retourne
+            }">
+            {{ e.retourne ? 'Retourné' : e.valide ? 'Validé' : 'En attente' }}
+          </span>
         </td>
-
-        <!-- ACTIONS -->
         <td>
-          <button class="btn btn-success btn-sm"
-                  (click)="valider(e.id)">
+          <button class="btn btn-success btn-sm me-2"
+            [disabled]="e.valide"
+            (click)="valider(e.id)">
             Valider
           </button>
-
-          <button class="btn btn-warning btn-sm ms-2"
-                  (click)="retour(e.id)">
+          <button class="btn btn-warning btn-sm"
+            [disabled]="e.retourne"
+            (click)="retour(e.id)">
             Retour
           </button>
         </td>
-
+      </tr>
+      <tr *ngIf="emprunts.length === 0">
+        <td colspan="6" class="text-center text-muted">No emprunts found.</td>
       </tr>
     </tbody>
   </table>

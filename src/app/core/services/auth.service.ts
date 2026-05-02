@@ -12,22 +12,15 @@ export class AuthService {
 
   // ================= LOGIN =================
   login(data: any) {
-    return this.http.post<any>(`${this.api}/login`, data);
+    return this.http.post<any>(`${this.api}/login`, {
+      email: data.email,
+      motDePasse: data.motDePasse
+    });
   }
 
-  // ================= REGISTER USER =================
-  registerUser(data: any) {
-    return this.http.post<any>(`${this.api}/register/user`, data);
-  }
-
-  // ================= REGISTER ADMIN =================
-  registerAdmin(data: any) {
-    return this.http.post<any>(`${this.api}/register/admin`, data);
-  }
-
-  // ================= REGISTER BIBLIOTHECAIRE =================
-  registerBibliothecaire(data: any) {
-    return this.http.post<any>(`${this.api}/register/bibliothecaire`, data);
+  // ================= REGISTER (GENERIC) =================
+  register(data: any) {
+    return this.http.post<any>(`${this.api}/register`, data);
   }
 
   // ================= STORAGE =================
@@ -39,20 +32,16 @@ export class AuthService {
     localStorage.setItem("role", role);
   }
 
-  getToken(): string | null {
-  return localStorage.getItem("token");
-}
+  getRole(): string | null {
+    return localStorage.getItem("role");
+  }
 
-getRole(): string | null {
-  return localStorage.getItem("role");
-}
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem("token");
+  }
 
-isLoggedIn(): boolean {
-  return !!this.getToken();
-}
-
-logout() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("role");
-}
+  logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+  }
 }

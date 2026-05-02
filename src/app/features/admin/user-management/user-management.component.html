@@ -1,54 +1,59 @@
 <div class="container mt-4">
 
-  <h2>👥 Users Management</h2>
-
-  <!-- FORM -->
-  <div class="card p-4 mt-3">
-
-    <h5>Create User / Bibliothecaire</h5>
-
-    <input class="form-control mb-2" placeholder="Nom" [(ngModel)]="form.nom">
-    <input class="form-control mb-2" placeholder="Prenom" [(ngModel)]="form.prenom">
-    <input class="form-control mb-2" placeholder="Email" [(ngModel)]="form.email">
-    <input class="form-control mb-2" placeholder="Password" [(ngModel)]="form.motDePasse">
-    <input class="form-control mb-2" placeholder="Telephone" [(ngModel)]="form.telephone">
-
-    <!-- ROLE -->
-    <select class="form-control mb-2" [(ngModel)]="role">
-      <option value="USER">User</option>
-      <option value="BIBLIOTHECAIRE">Bibliothecaire</option>
-    </select>
-
-    <button class="btn btn-success" (click)="create()">
-      Create
-    </button>
-
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>User Management</h2>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" routerLink="/admin/users/create">
+        + New User
+      </button>
+      <button class="btn btn-secondary" routerLink="/admin/bibliothecaires/create">
+        + New Bibliothecaire
+      </button>
+    </div>
   </div>
 
-  <!-- LIST -->
-  <div class="card p-4 mt-4">
-
-    <h5>Users List</h5>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Email</th>
-          <th>Role</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr *ngFor="let u of users">
-          <td>{{ u.nom }}</td>
-          <td>{{ u.email }}</td>
-          <td>{{ u.role }}</td>
-        </tr>
-      </tbody>
-
-    </table>
-
-  </div>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.nom }}</td>
+        <td>{{ user.prenom }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <span class="badge"
+            [ngClass]="{
+              'bg-danger':  user.role === 'ADMIN',
+              'bg-warning text-dark': user.role === 'BIBLIOTHECAIRE',
+              'bg-primary': user.role === 'USER'
+            }">
+            {{ user.role }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary me-2"
+            [routerLink]="['/admin/users/edit', user.id]">
+            Edit
+          </button>
+          <button class="btn btn-sm btn-outline-danger"
+            (click)="deleteUser(user.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="users.length === 0">
+        <td colspan="6" class="text-center text-muted">No users found.</td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>

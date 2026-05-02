@@ -13,31 +13,33 @@ export class RegisterComponent {
     nom: '',
     prenom: '',
     email: '',
-    motDePasse: ''
+    motDePasse: '',
+    telephone: '',
+    role: '' // optional
   };
 
   selectedRole: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   register() {
-    if (this.selectedRole === 'ADMIN') {
-      this.authService.registerAdmin(this.registerData).subscribe({
-        next: () => this.router.navigate(['/login']),
-        error: (err) => console.error("REGISTER ERROR", err)
-      });
 
-    } else if (this.selectedRole === 'BIBLIOTHECAIRE') {
-      this.authService.registerBibliothecaire(this.registerData).subscribe({
-        next: () => this.router.navigate(['/login']),
-        error: (err) => console.error("REGISTER ERROR", err)
-      });
-
-    } else {
-      this.authService.registerUser(this.registerData).subscribe({
-        next: () => this.router.navigate(['/login']),
-        error: (err) => console.error("REGISTER ERROR", err)
-      });
+    // attach selected role if needed
+    if (this.selectedRole) {
+      this.registerData.role = this.selectedRole;
     }
+
+    this.authService.register(this.registerData).subscribe({
+      next: () => {
+        console.log("REGISTER OK");
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.error("REGISTER ERROR", err);
+      }
+    });
   }
 }

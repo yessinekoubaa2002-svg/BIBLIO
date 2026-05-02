@@ -1,123 +1,47 @@
 <div class="container mt-4">
 
-  <h2 class="mb-4">👑 Admin Dashboard</h2>
-  <div class="d-flex gap-3 mb-3">
+  <h2 class="mb-4">Admin Dashboard</h2>
 
-  <button class="btn btn-primary"
-          routerLink="/users-management"
-          [queryParams]="{ role: 'USER' }">
-    👤 Add User
-  </button>
+  <div class="d-flex gap-3 mb-4 flex-wrap">
+    <button class="btn btn-primary" routerLink="/admin/users">
+      Users
+    </button>
+    <button class="btn btn-success" routerLink="/admin/bibliothecaires">
+      Bibliothecaires
+    </button>
+    <button class="btn btn-dark" routerLink="/admin/livres">
+      Books
+    </button>
+    <button class="btn btn-warning" routerLink="/admin/categories">
+      Categories
+    </button>
+  </div>
 
-  <button class="btn btn-success"
-          routerLink="/users-management"
-          [queryParams]="{ role: 'BIBLIOTHECAIRE' }">
-    📚 Add Bibliothecaire
-  </button>
-
-</div>
-
-  <!-- ===== STATS CARDS ===== -->
   <div class="row g-3">
-
     <div class="col-md-3">
       <div class="card text-white bg-primary shadow-sm p-3">
         <h6>Users</h6>
         <h2>{{ stats?.totalUsers }}</h2>
       </div>
     </div>
-
     <div class="col-md-3">
       <div class="card text-white bg-success shadow-sm p-3">
         <h6>Books</h6>
         <h2>{{ stats?.totalBooks }}</h2>
       </div>
     </div>
-
     <div class="col-md-3">
       <div class="card text-dark bg-warning shadow-sm p-3">
         <h6>Emprunts</h6>
         <h2>{{ stats?.totalEmprunts }}</h2>
       </div>
     </div>
-
     <div class="col-md-3">
       <div class="card text-white bg-info shadow-sm p-3">
         <h6>Pending</h6>
         <h2>{{ stats?.pendingEmprunts }}</h2>
       </div>
     </div>
-
-    <div class="col-md-3">
-      <div class="card text-white bg-secondary shadow-sm p-3">
-        <h6>Returned</h6>
-        <h2>{{ stats?.returnedBooks }}</h2>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card text-white bg-danger shadow-sm p-3">
-        <h6>Overdue</h6>
-        <h2>{{ stats?.overdueBooks }}</h2>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card text-white bg-dark shadow-sm p-3">
-        <h6>Bibliothecaires</h6>
-        <h2>{{ stats?.totalBibliothecaires }}</h2>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card text-white bg-success shadow-sm p-3">
-        <h6>Available</h6>
-        <h2>{{ stats?.availableBooks }}</h2>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card text-dark bg-warning shadow-sm p-3">
-        <h6>Low Stock</h6>
-        <h2>{{ stats?.lowStockBooks }}</h2>
-      </div>
-    </div>
-
-  </div>
-
-
-  <!-- ===== CHARTS ===== -->
-  <div class="row mt-5 g-4">
-
-    <!-- Emprunts Chart -->
-    <div class="col-md-6">
-      <div class="card shadow-sm p-4">
-        <h5 class="mb-3">📊 Emprunts Overview</h5>
-        <canvas id="empruntChart"></canvas>
-      </div>
-    </div>
-
-    <!-- Books Chart -->
-    <div class="col-md-6">
-      <div class="card shadow-sm p-4">
-        <h5 class="mb-3">📚 Books Status</h5>
-        <canvas id="booksChart"></canvas>
-      </div>
-    </div>
-
-  </div>
-
-
-  <!-- ===== ROLES PIE CHART ===== -->
-  <div class="row mt-5">
-
-    <div class="col-md-6">
-      <div class="card shadow-sm p-4">
-        <h5 class="mb-3">👥 Users Roles</h5>
-        <canvas id="rolesChart"></canvas>
-      </div>
-    </div>
-
   </div>
 
 </div>
