@@ -1,49 +1,278 @@
-.role-selector {
-  margin: 10px 0;
-}
+/* register.component.css
+   Uses the same Biblio master theme variables.
+   biblio-theme.css must be imported in styles.css.
+*/
 
-.role-selector label {
-  font-weight: bold;
-  margin-bottom: 8px;
+:host {
   display: block;
 }
 
-.role-buttons {
+/* ── Page Layout ── */
+.biblio-register-page {
+  background-color: var(--biblio-ink);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Decorative orbs ── */
+.biblio-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.biblio-orb-1 {
+  width: 420px;
+  height: 420px;
+  background: rgba(232, 168, 56, 0.07);
+  top: -120px;
+  right: -120px;
+}
+
+.biblio-orb-2 {
+  width: 320px;
+  height: 320px;
+  background: rgba(15, 52, 96, 0.55);
+  bottom: -80px;
+  left: -80px;
+}
+
+.biblio-orb-3 {
+  width: 200px;
+  height: 200px;
+  background: rgba(74, 124, 89, 0.12);
+  top: 50%;
+  left: -60px;
+}
+
+/* ── Card wrapper ── wider for register ── */
+.biblio-card-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  padding: 1rem;
+  animation: biblio-fade-up 0.5s ease both;
+}
+
+/* ── Icon circle ── */
+.biblio-icon-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--biblio-amber);
+  color: var(--biblio-ink);
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 32px rgba(232, 168, 56, 0.4);
 }
 
-.role-buttons button {
+/* ── Title ── */
+.biblio-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--biblio-parchment);
+  letter-spacing: -0.5px;
+}
+
+/* ── Badge ── */
+.biblio-badge {
+  background: var(--biblio-amber-glow);
+  color: var(--biblio-amber);
+  border: 1px solid rgba(232, 168, 56, 0.3);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  padding: 0.25rem 0.85rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+/* ── Inner card ── */
+.biblio-card-inner {
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+}
+
+.biblio-card-inner .p-card {
+  background: var(--biblio-ink-soft) !important;
+  border: 1px solid var(--biblio-ink-muted) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.biblio-card-inner .p-card .p-card-body {
+  padding: 1.5rem 2rem 1rem !important;
+}
+
+.biblio-card-inner .p-card .p-card-footer {
+  padding: 0 2rem 1.25rem !important;
+}
+
+/* ── Card header ── */
+.biblio-card-header {
+  border-bottom: 1px solid var(--biblio-ink-muted);
+}
+
+/* ── Labels ── */
+.biblio-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--biblio-slate);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* ── Inputs ── */
+.biblio-input .p-inputtext {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid var(--biblio-ink-muted) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--biblio-parchment) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.95rem !important;
+  padding: 0.85rem 1rem 0.85rem 2.75rem !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.biblio-input .p-inputtext::placeholder {
+  color: var(--biblio-slate) !important;
+}
+
+.biblio-input .p-inputtext:focus {
+  border-color: var(--biblio-amber) !important;
+  box-shadow: 0 0 0 3px var(--biblio-amber-glow) !important;
+}
+
+.biblio-input .p-input-icon-left > i {
+  color: var(--biblio-amber);
+}
+
+/* ── Error message ── */
+.biblio-error {
+  background: rgba(192, 57, 43, 0.12);
+  border: 1px solid rgba(192, 57, 43, 0.35);
+  border-radius: var(--radius-sm);
+  color: #e57373;
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+  padding: 0.6rem 0.85rem;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Primary Button ── */
+.biblio-btn.p-button {
+  background: var(--biblio-amber) !important;
+  border: none !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--biblio-ink) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.4px;
+  padding: 0.9rem 1.5rem !important;
+  box-shadow: var(--shadow-btn) !important;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.biblio-btn.p-button:hover:not(:disabled) {
+  background: var(--biblio-amber-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(232, 168, 56, 0.5) !important;
+}
+
+.biblio-btn.p-button:active {
+  background: var(--biblio-amber-dark) !important;
+  transform: translateY(0);
+}
+
+.biblio-btn.p-button:disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+}
+
+/* ── Ghost Button ── */
+.biblio-btn-ghost.p-button {
+  background: transparent !important;
+  border: 1px solid var(--biblio-ink-muted) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--biblio-parchment) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+  font-size: 0.95rem !important;
+  padding: 0.85rem 1.5rem !important;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease !important;
+}
+
+.biblio-btn-ghost.p-button:hover {
+  border-color: var(--biblio-amber) !important;
+  color: var(--biblio-amber) !important;
+  background: var(--biblio-amber-glow) !important;
+}
+
+.biblio-btn-ghost.p-button .p-button-icon {
+  color: var(--biblio-amber) !important;
+}
+
+/* ── SelectButton (Role picker) ── */
+.biblio-select-btn.p-selectbutton {
+  display: flex;
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--biblio-ink-muted);
+}
+
+.biblio-select-btn .p-button {
   flex: 1;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  background: white;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: none !important;
+  border-right: 1px solid var(--biblio-ink-muted) !important;
+  color: var(--biblio-slate) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+  padding: 0.75rem 1rem !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
 }
 
-.role-buttons button.active {
-  border-color: #198754;
-  background-color: #198754;
-  color: white;
-  font-weight: bold;
+.biblio-select-btn .p-button:last-child {
+  border-right: none !important;
 }
 
-.role-buttons button:hover:not(.active) {
-  border-color: #198754;
-  color: #198754;
-}
-.role-buttons button {
-  margin-right: 10px;
-  padding: 10px 15px;
-  border: 1px solid #ccc;
-  background: white;
-  cursor: pointer;
+.biblio-select-btn .p-button:hover {
+  background: var(--biblio-amber-glow) !important;
+  color: var(--biblio-amber) !important;
 }
 
-.role-buttons button.active {
-  background: #0d6efd;
-  color: white;
+.biblio-select-btn .p-button.p-highlight {
+  background: var(--biblio-amber) !important;
+  color: var(--biblio-ink) !important;
+  font-weight: 500 !important;
+}
+
+/* ── Divider ── */
+.biblio-divider {
+  border: none;
+  border-top: 1px solid var(--biblio-ink-muted);
+  margin: 1.25rem 0;
+}
+
+/* ── Entrance animation ── */
+@keyframes biblio-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

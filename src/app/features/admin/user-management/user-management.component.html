@@ -1,59 +1,102 @@
-<div class="container mt-4">
+<div class="biblio-container p-4">
 
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>User Management</h2>
-    <div class="d-flex gap-2">
-      <button class="btn btn-primary" routerLink="/admin/users/create">
-        + New User
-      </button>
-      <button class="btn btn-secondary" routerLink="/admin/bibliothecaires/create">
-        + New Bibliothecaire
-      </button>
+  <!-- HEADER -->
+  <p-card styleClass="mb-4 shadow-2 border-round-xl">
+
+    <div class="flex justify-content-between align-items-center">
+
+      <div>
+        <h2 class="text-2xl font-bold m-0">User Management</h2>
+        <p class="text-500 mt-1">Manage system users & librarians</p>
+      </div>
+
+      <div class="flex gap-2">
+        <button pButton
+                icon="pi pi-user-plus"
+                label="New User"
+                class="p-button-primary"
+                routerLink="/admin/users/create">
+        </button>
+
+        <button pButton
+                icon="pi pi-id-card"
+                label="New Bibliothecaire"
+                class="p-button-secondary"
+                routerLink="/admin/bibliothecaires/create">
+        </button>
+      </div>
+
     </div>
-  </div>
 
-  <table class="table table-bordered table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Prenom</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.id }}</td>
-        <td>{{ user.nom }}</td>
-        <td>{{ user.prenom }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-          <span class="badge"
-            [ngClass]="{
-              'bg-danger':  user.role === 'ADMIN',
-              'bg-warning text-dark': user.role === 'BIBLIOTHECAIRE',
-              'bg-primary': user.role === 'USER'
-            }">
-            {{ user.role }}
-          </span>
-        </td>
-        <td>
-          <button class="btn btn-sm btn-outline-primary me-2"
-            [routerLink]="['/admin/users/edit', user.id]">
-            Edit
-          </button>
-          <button class="btn btn-sm btn-outline-danger"
-            (click)="deleteUser(user.id)">
-            Delete
-          </button>
-        </td>
-      </tr>
-      <tr *ngIf="users.length === 0">
-        <td colspan="6" class="text-center text-muted">No users found.</td>
-      </tr>
-    </tbody>
-  </table>
+  </p-card>
+
+  <!-- TABLE -->
+  <p-card header="Users List" styleClass="shadow-2 border-round-xl">
+
+    <p-table
+      [value]="users"
+      [paginator]="true"
+      [rows]="5"
+      responsiveLayout="scroll">
+
+      <!-- HEADER -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+
+      <!-- BODY -->
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.nom }}</td>
+          <td>{{ user.prenom }}</td>
+          <td>{{ user.email }}</td>
+
+          <td>
+            <p-tag
+              [value]="user.role"
+              [severity]="
+                user.role === 'ADMIN'
+                  ? 'danger'
+                  : user.role === 'BIBLIOTHECAIRE'
+                  ? 'warning'
+                  : 'info'
+              ">
+            </p-tag>
+          </td>
+
+          <td class="flex gap-2">
+            <button pButton icon="pi pi-pencil"
+                    class="p-button-sm p-button-warning"
+                    [routerLink]="['/admin/users/edit', user.id]">
+            </button>
+
+            <button pButton icon="pi pi-trash"
+                    class="p-button-sm p-button-danger"
+                    (click)="deleteUser(user.id)">
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <!-- EMPTY -->
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6" class="text-center text-500">
+            No users found
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+
+  </p-card>
 
 </div>

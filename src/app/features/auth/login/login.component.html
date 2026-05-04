@@ -1,106 +1,108 @@
-<div class="container">
+<div class="biblio-login-page flex align-items-center justify-content-center min-h-screen">
 
-  <!-- TOGGLE BUTTONS -->
-  <div class="mb-3">
-    <button class="btn btn-primary me-2" (click)="mode='login'">Login</button>
-    <button class="btn btn-success" (click)="mode='register'">Register</button>
-  </div>
+  <!-- Decorative background orbs -->
+  <div class="biblio-orb biblio-orb-1"></div>
+  <div class="biblio-orb biblio-orb-2"></div>
 
-  <!-- ================= LOGIN ================= -->
-  <form *ngIf="mode === 'login'" (ngSubmit)="login()">
+  <div class="biblio-card-wrapper">
 
-    <input type="text"
-           [(ngModel)]="loginForm.email"
-           name="loginEmail"
-           placeholder="Email"
-           class="form-control"/><br>
-
-    <input type="password"
-           [(ngModel)]="loginForm.motDePasse"
-           name="loginPassword"
-           placeholder="Mot de passe"
-           class="form-control"/><br>
-
-    <button class="btn btn-primary w-100" type="submit">Login</button>
-
-  </form>
-
-  <!-- ================= REGISTER ================= -->
-  <form *ngIf="mode === 'register'" (ngSubmit)="register()">
-
-    <input type="text"
-           [(ngModel)]="registerForm.nom"
-           name="nom"
-           placeholder="Nom"
-           class="form-control"/><br>
-
-    <input type="text"
-           [(ngModel)]="registerForm.prenom"
-           name="prenom"
-           placeholder="Prenom"
-           class="form-control"/><br>
-
-    <input type="email"
-           [(ngModel)]="registerForm.email"
-           name="registerEmail"
-           placeholder="Email"
-           class="form-control"/><br>
-
-    <input type="password"
-           [(ngModel)]="registerForm.motDePasse"
-           name="registerPassword"
-           placeholder="Mot de passe"
-           class="form-control"/><br>
-
-    <input type="text"
-           [(ngModel)]="registerForm.telephone"
-           name="telephone"
-           placeholder="Telephone"
-           class="form-control"/><br>
-
-    <!-- ONLY FOR BIBLIOTHECAIRE -->
-    <ng-container *ngIf="selectedRole === 'BIBLIOTHECAIRE'">
-
-      <input type="text"
-             [(ngModel)]="registerForm.matricule"
-             name="matricule"
-             placeholder="Matricule"
-             class="form-control"/><br>
-
-      <input type="number"
-             [(ngModel)]="registerForm.salaire"
-             name="salaire"
-             placeholder="Salaire"
-             class="form-control"/><br>
-
-    </ng-container>
-
-    <!-- ROLE SELECTOR -->
-    <div class="role-selector mb-3">
-      <label>Select Role:</label>
-      <div class="role-buttons">
-
-        <button type="button"
-                [class.active]="selectedRole === 'USER'"
-                (click)="selectedRole = 'USER'">
-          👤 User
-        </button>
-
-        <button type="button"
-                [class.active]="selectedRole === 'BIBLIOTHECAIRE'"
-                (click)="selectedRole = 'BIBLIOTHECAIRE'">
-          📚 Bibliothecaire
-        </button>
-
+    <!-- Logo / Brand -->
+    <div class="flex flex-column align-items-center mb-5">
+      <div class="biblio-icon-circle mb-3">
+        <i class="pi pi-book" style="font-size: 1.75rem;"></i>
       </div>
+      <h1 class="biblio-title m-0">Biblio System</h1>
+      <span class="biblio-badge mt-2">Library Management</span>
     </div>
 
-    <button class="btn btn-success w-100"
-            type="submit"
-            [disabled]="!selectedRole">
-      Register as {{ selectedRole || '...' }}
-    </button>
+    <!-- Card -->
+    <p-card class="biblio-card-inner">
 
-  </form>
+      <ng-template pTemplate="header">
+        <div class="biblio-card-header px-4 pt-4 pb-3">
+          <h2 class="m-0" style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--biblio-parchment);">
+            Welcome back
+          </h2>
+          <p class="mt-1 mb-0" style="color: var(--biblio-slate); font-size: 0.875rem;">
+            Sign in to access your dashboard
+          </p>
+        </div>
+      </ng-template>
+
+      <form (ngSubmit)="login()" #f="ngForm" class="px-1">
+
+        <!-- EMAIL -->
+        <div class="field mb-4">
+          <label class="biblio-label block mb-2">Email address</label>
+          <span class="p-input-icon-left w-full biblio-input">
+            <i class="pi pi-envelope" style="color: var(--biblio-amber);"></i>
+            <input
+              pInputText
+              type="email"
+              placeholder="you@example.com"
+              class="w-full"
+              [(ngModel)]="loginForm.email"
+              name="email"
+              required />
+          </span>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="field mb-2">
+          <div class="flex justify-content-between align-items-center mb-2">
+            <label class="biblio-label">Password</label>
+            <a href="#" class="biblio-link text-sm">Forgot password?</a>
+          </div>
+          <span class="p-input-icon-left w-full biblio-input">
+            <i class="pi pi-lock" style="color: var(--biblio-amber);"></i>
+            <input
+              pInputText
+              type="password"
+              placeholder="••••••••"
+              class="w-full"
+              [(ngModel)]="loginForm.motDePasse"
+              name="motDePasse"
+              required />
+          </span>
+        </div>
+
+        <!-- DIVIDER -->
+        <hr class="biblio-divider mt-4" />
+
+        <!-- SIGN IN BUTTON -->
+        <button
+          pButton
+          pRipple
+          type="submit"
+          label="Sign In"
+          icon="pi pi-arrow-right"
+          iconPos="right"
+          class="w-full biblio-btn mb-3">
+        </button>
+
+        <!-- REGISTER BUTTON -->
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Create an Account"
+          icon="pi pi-user-plus"
+          iconPos="left"
+          class="w-full biblio-btn-ghost"
+          [routerLink]="['/register']">
+        </button>
+
+      </form>
+
+      <ng-template pTemplate="footer">
+        <div class="text-center pb-2" style="color: var(--biblio-slate); font-size: 0.8rem;">
+          <i class="pi pi-shield mr-1" style="color: var(--biblio-amber);"></i>
+          Secured · Biblio Management System
+        </div>
+      </ng-template>
+
+    </p-card>
+
+  </div>
 
 </div>

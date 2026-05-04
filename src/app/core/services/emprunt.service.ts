@@ -8,12 +8,18 @@ import { Emprunt } from 'src/app/models/emprunt';
 })
 export class EmpruntService {
 
-  private api = "http://localhost:8081/emprunts";
+  private api = 'http://localhost:8081/emprunts';
 
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Emprunt[]> {
     return this.http.get<Emprunt[]>(this.api);
+  }
+
+  // ✅ ADD THIS — for My Loans page
+  getMyEmprunts(): Observable<Emprunt[]> {
+    const userId = localStorage.getItem('userId');
+    return this.http.get<Emprunt[]>(`${this.api}/user/${userId}`);
   }
 
   create(livreId: number): Observable<Emprunt> {

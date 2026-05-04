@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf="isLoggedIn(); else publicPages">
+  <app-layout></app-layout>
+</ng-container>
+
+<ng-template #publicPages>
+  <router-outlet></router-outlet>
+</ng-template>

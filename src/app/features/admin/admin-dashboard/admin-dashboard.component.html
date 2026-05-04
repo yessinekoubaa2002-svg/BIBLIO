@@ -1,47 +1,145 @@
-<div class="container mt-4">
+<div class="p-4 surface-ground min-h-screen">
 
-  <h2 class="mb-4">Admin Dashboard</h2>
+  <!-- HEADER -->
+  <p-card styleClass="mb-4 shadow-2">
+    <div class="flex justify-content-between align-items-center">
+      <div>
+        <h2 class="m-0">Admin Dashboard</h2>
+        <small class="text-500">Library overview & analytics</small>
+      </div>
+      <i class="pi pi-chart-line text-4xl text-primary"></i>
+    </div>
+  </p-card>
 
-  <div class="d-flex gap-3 mb-4 flex-wrap">
-    <button class="btn btn-primary" routerLink="/admin/users">
-      Users
-    </button>
-    <button class="btn btn-success" routerLink="/admin/bibliothecaires">
-      Bibliothecaires
-    </button>
-    <button class="btn btn-dark" routerLink="/admin/livres">
-      Books
-    </button>
-    <button class="btn btn-warning" routerLink="/admin/categories">
-      Categories
-    </button>
+  <!-- NAV -->
+  <div class="grid mb-4">
+
+    <div class="col-12 md:col-3">
+      <p-card styleClass="text-center cursor-pointer shadow-2 hover:shadow-4 transition-all"
+              routerLink="/admin/users">
+        <i class="pi pi-users text-3xl text-blue-500"></i>
+        <h3>Users</h3>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-3">
+      <p-card styleClass="text-center cursor-pointer shadow-2 hover:shadow-4 transition-all"
+              routerLink="/admin/bibliothecaires">
+        <i class="pi pi-id-card text-3xl text-purple-500"></i>
+        <h3>Bibliothecaires</h3>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-3">
+      <p-card styleClass="text-center cursor-pointer shadow-2 hover:shadow-4 transition-all"
+              routerLink="/admin/livres">
+        <i class="pi pi-book text-3xl text-green-500"></i>
+        <h3>Books</h3>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-3">
+      <p-card styleClass="text-center cursor-pointer shadow-2 hover:shadow-4 transition-all"
+              routerLink="/admin/categories">
+        <i class="pi pi-tag text-3xl text-orange-500"></i>
+        <h3>Categories</h3>
+      </p-card>
+    </div>
+
   </div>
 
-  <div class="row g-3">
-    <div class="col-md-3">
-      <div class="card text-white bg-primary shadow-sm p-3">
-        <h6>Users</h6>
-        <h2>{{ stats?.totalUsers }}</h2>
-      </div>
+  <!-- STATS -->
+  <div class="grid mb-4">
+
+    <div class="col-12 md:col-3">
+      <p-card>
+        <div class="flex justify-content-between">
+          <div>
+            <small class="text-500">Users</small>
+            <h2>{{ stats?.totalUsers ?? 0 }}</h2>
+          </div>
+          <i class="pi pi-users text-blue-500 text-3xl"></i>
+        </div>
+      </p-card>
     </div>
-    <div class="col-md-3">
-      <div class="card text-white bg-success shadow-sm p-3">
-        <h6>Books</h6>
-        <h2>{{ stats?.totalBooks }}</h2>
-      </div>
+
+    <div class="col-12 md:col-3">
+      <p-card>
+        <div class="flex justify-content-between">
+          <div>
+            <small class="text-500">Books</small>
+            <h2>{{ stats?.totalBooks ?? 0 }}</h2>
+          </div>
+          <i class="pi pi-book text-green-500 text-3xl"></i>
+        </div>
+      </p-card>
     </div>
-    <div class="col-md-3">
-      <div class="card text-dark bg-warning shadow-sm p-3">
-        <h6>Emprunts</h6>
-        <h2>{{ stats?.totalEmprunts }}</h2>
-      </div>
+
+    <div class="col-12 md:col-3">
+      <p-card>
+        <div class="flex justify-content-between">
+          <div>
+            <small class="text-500">Emprunts</small>
+            <h2>{{ stats?.totalEmprunts ?? 0 }}</h2>
+          </div>
+          <i class="pi pi-bookmark text-purple-500 text-3xl"></i>
+        </div>
+      </p-card>
     </div>
-    <div class="col-md-3">
-      <div class="card text-white bg-info shadow-sm p-3">
-        <h6>Pending</h6>
-        <h2>{{ stats?.pendingEmprunts }}</h2>
-      </div>
+
+    <div class="col-12 md:col-3">
+      <p-card>
+        <div class="flex justify-content-between">
+          <div>
+            <small class="text-500">Pending</small>
+            <h2>{{ stats?.pendingEmprunts ?? 0 }}</h2>
+          </div>
+          <i class="pi pi-clock text-red-500 text-3xl"></i>
+        </div>
+      </p-card>
     </div>
+
+  </div>
+
+  <!-- CHARTS (4 GRAPHS) -->
+  <div class="grid">
+
+    <div class="col-12 md:col-6">
+      <p-card header="Overview">
+        <p-chart type="bar"
+                 [data]="overviewChartData"
+                 [options]="chartOptions">
+        </p-chart>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-6">
+      <p-card header="Distribution">
+        <p-chart type="doughnut"
+                 [data]="distributionChartData"
+                 [options]="chartOptions">
+        </p-chart>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-6">
+      <p-card header="Emprunts Status">
+        <p-chart type="pie"
+                 [data]="empruntChartData"
+                 [options]="chartOptions">
+        </p-chart>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-6">
+      <p-card header="Trend">
+        <p-chart type="line"
+                 [data]="trendChartData"
+                 [options]="chartOptions">
+        </p-chart>
+      </p-card>
+    </div>
+
   </div>
 
 </div>

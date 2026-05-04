@@ -1,56 +1,107 @@
-<div class="container mt-4">
+<div class="biblio-dashboard p-4">
 
-  <!-- FORM -->
-  <div class="card p-3 mb-4">
-    <h3>{{ isEditMode ? 'Edit Category' : 'Create Category' }}</h3>
+  <!-- ================= HEADER ================= -->
+  <p-card styleClass="mb-4 shadow-2 border-round-xl">
 
-    <input class="form-control mb-3"
-      [(ngModel)]="category.nom"
-      placeholder="Category name">
+    <div class="flex justify-content-between align-items-center">
 
-    <div class="d-flex gap-2">
-      <button class="btn btn-success" (click)="save()">
-        {{ isEditMode ? 'Update' : 'Create' }}
-      </button>
+      <div>
+        <h2 class="text-2xl font-bold m-0">
+          {{ isEditMode ? 'Edit Category' : 'Create Category' }}
+        </h2>
+        <p class="text-500 mt-1">Manage book categories</p>
+      </div>
 
-      <button class="btn btn-secondary" routerLink="/admin/categories">
-        Cancel
-      </button>
+      <i class="pi pi-tag text-3xl text-orange-500"></i>
+
     </div>
-  </div>
 
-  <!-- LIST -->
-  <div class="card p-3">
-    <h4>Categories List</h4>
+  </p-card>
 
-    <table class="table table-striped mt-3">
-      <thead>
+  <!-- ================= FORM ================= -->
+  <p-card styleClass="mb-4 shadow-2 border-round-xl">
+
+    <div class="p-fluid">
+
+      <input pInputText
+             [(ngModel)]="category.nom"
+             placeholder="Category name"
+             class="mb-3"/>
+
+      <div class="flex gap-2">
+
+        <button pButton
+                icon="pi pi-check"
+                label="{{ isEditMode ? 'Update' : 'Create' }}"
+                class="p-button-success"
+                (click)="save()">
+        </button>
+
+        <button pButton
+                icon="pi pi-times"
+                label="Cancel"
+                class="p-button-secondary"
+                routerLink="/admin/categories">
+        </button>
+
+      </div>
+
+    </div>
+
+  </p-card>
+
+  <!-- ================= LIST ================= -->
+  <p-card header="Categories List" styleClass="shadow-2 border-round-xl">
+
+    <p-table [value]="categories"
+             [paginator]="true"
+             [rows]="5"
+             responsiveLayout="scroll">
+
+      <ng-template pTemplate="header">
         <tr>
           <th>ID</th>
           <th>Name</th>
-          <th style="width: 200px;">Actions</th>
+          <th>Actions</th>
         </tr>
-      </thead>
+      </ng-template>
 
-      <tbody>
-        <tr *ngFor="let c of categories">
+      <ng-template pTemplate="body" let-c>
+        <tr>
           <td>{{ c.id }}</td>
-          <td>{{ c.nom }}</td>
           <td>
-            <button class="btn btn-warning btn-sm me-2"
-              (click)="goEdit(c.id)">
-              Edit
+            <p-tag [value]="c.nom" severity="info"></p-tag>
+          </td>
+
+          <td class="flex gap-2">
+
+            <button pButton
+                    icon="pi pi-pencil"
+                    class="p-button-sm p-button-warning"
+                    (click)="goEdit(c.id)">
             </button>
 
-            <button class="btn btn-danger btn-sm"
-              (click)="delete(c.id)">
-              Delete
+            <button pButton
+                    icon="pi pi-trash"
+                    class="p-button-sm p-button-danger"
+                    (click)="delete(c.id)">
             </button>
+
           </td>
         </tr>
-      </tbody>
-    </table>
+      </ng-template>
 
-  </div>
+      <!-- EMPTY STATE -->
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="3" class="text-center text-500">
+            No categories found
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+
+  </p-card>
 
 </div>

@@ -1,0 +1,86 @@
+<div class="loans-page">
+
+  <!-- HEADER -->
+  <div class="loans-header">
+    <div>
+      <h2 class="loans-title">
+        <i class="pi pi-bookmark mr-2"></i> My Loans
+      </h2>
+      <p class="loans-subtitle">Track your borrowed books</p>
+    </div>
+    <div class="loans-count">
+      {{ filtered.length }} loan{{ filtered.length !== 1 ? 's' : '' }}
+    </div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="loans-filters">
+    <button *ngFor="let f of filters"
+            class="filter-btn"
+            [class.active]="activeFilter === f.value"
+            (click)="applyFilter(f.value)">
+      {{ f.label }}
+    </button>
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="loading" class="loans-loading">
+    <i class="pi pi-spin pi-spinner" style="font-size: 2rem;"></i>
+    <p>Loading your loans...</p>
+  </div>
+
+  <!-- EMPTY -->
+  <div *ngIf="!loading && filtered.length === 0" class="loans-empty">
+    <i class="pi pi-inbox" style="font-size: 3rem; color: #ccc;"></i>
+    <p>No loans found.</p>
+  </div>
+
+  <!-- LOAN CARDS -->
+  <div *ngIf="!loading" class="loans-grid">
+    <div *ngFor="let e of filtered" class="loan-card">
+
+      <!-- BOOK ICON -->
+      <div class="loan-book-icon">
+        <i class="pi pi-book"></i>
+      </div>
+
+      <!-- BOOK INFO -->
+      <div class="loan-info">
+        <h3 class="loan-title">{{ e.livre.titre }}</h3>
+        <p class="loan-author">{{ e.livre.auteur }}</p>
+
+        <div class="loan-dates">
+          <div class="loan-date-item">
+            <i class="pi pi-calendar mr-1"></i>
+            <span>Borrowed: <strong>{{ e.dateEmprunt }}</strong></span>
+          </div>
+          <div class="loan-date-item">
+            <i class="pi pi-calendar-times mr-1"></i>
+            <span>Due: <strong>{{ e.dateLimiteRetour }}</strong></span>
+          </div>
+          <div *ngIf="e.retourne && e.dateRetour" class="loan-date-item">
+            <i class="pi pi-check-circle mr-1"></i>
+            <span>Returned: <strong>{{ e.dateRetour }}</strong></span>
+          </div>
+        </div>
+
+        <!-- DAYS LEFT -->
+        <div *ngIf="!e.retourne && e.valide"
+             class="days-left"
+             [class.urgent]="getDaysLeft(e.dateLimiteRetour) <= 3">
+          <i class="pi pi-clock mr-1"></i>
+          {{ getDaysLeft(e.dateLimiteRetour) }} day(s) left
+        </div>
+      </div>
+
+      <!-- STATUS BADGE -->
+      <div class="loan-status">
+        <span class="status-badge" [ngClass]="getStatus(e).class">
+          {{ getStatus(e).label }}
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+</div>

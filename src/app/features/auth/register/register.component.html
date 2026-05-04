@@ -1,66 +1,160 @@
-<h1 style="color:red">REGISTER PAGE ONLY</h1>
-<div class="container">
+<div class="biblio-register-page flex align-items-center justify-content-center min-h-screen">
 
-  <h2>Register</h2>
+  <!-- Decorative orbs -->
+  <div class="biblio-orb biblio-orb-1"></div>
+  <div class="biblio-orb biblio-orb-2"></div>
+  <div class="biblio-orb biblio-orb-3"></div>
 
-  <form (ngSubmit)="register()" #registerForm="ngForm">
+  <div class="biblio-card-wrapper">
 
-    <input type="text"
-           [(ngModel)]="registerData.nom"
-           name="nom"
-           placeholder="Nom"
-           class="form-control"
-           required /><br>
-
-    <input type="text"
-           [(ngModel)]="registerData.prenom"
-           name="prenom"
-           placeholder="Prenom"
-           class="form-control"
-           required /><br>
-
-    <input type="email"
-           [(ngModel)]="registerData.email"
-           name="email"
-           placeholder="Email"
-           class="form-control"
-           required /><br>
-
-    <input type="password"
-           [(ngModel)]="registerData.motDePasse"
-           name="motDePasse"
-           placeholder="Mot de passe"
-           class="form-control"
-           required /><br>
-
-    <!-- ROLE SELECTOR -->
-    <div class="role-selector">
-      <label>Select Role:</label>
-      <div class="role-buttons">
-
-        <button type="button"
-                [class.active]="selectedRole === 'USER'"
-                (click)="selectedRole = 'USER'">
-          👤 User
-        </button>
-
-        <button type="button"
-                [class.active]="selectedRole === 'BIBLIOTHECAIRE'"
-                (click)="selectedRole = 'BIBLIOTHECAIRE'">
-          📚 Bibliothecaire
-        </button>
-
-        
-
+    <!-- Logo / Brand -->
+    <div class="flex flex-column align-items-center mb-4">
+      <div class="biblio-icon-circle mb-3">
+        <i class="pi pi-book" style="font-size: 1.75rem;"></i>
       </div>
-    </div><br>
+      <h1 class="biblio-title m-0">Biblio System</h1>
+      <span class="biblio-badge mt-2">Create your account</span>
+    </div>
 
-    <button class="btn btn-success w-100"
-            type="submit"
-            [disabled]="!selectedRole">
-      Register as {{ selectedRole || '...' }}
-    </button>
+    <!-- Card -->
+    <p-card class="biblio-card-inner">
 
-  </form>
+      <ng-template pTemplate="header">
+        <div class="biblio-card-header px-4 pt-4 pb-3">
+          <h2 class="m-0" style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--biblio-parchment);">
+            Join the library
+          </h2>
+          <p class="mt-1 mb-0" style="color: var(--biblio-slate); font-size: 0.875rem;">
+            Fill in your details to get started
+          </p>
+        </div>
+      </ng-template>
 
+      <form (ngSubmit)="register()" #f="ngForm" class="px-1">
+
+        <!-- ROW 1: Nom + Prenom -->
+        <div class="grid mb-1">
+          <div class="col-12 md:col-6 field">
+            <label class="biblio-label block mb-2">Last name</label>
+            <span class="p-input-icon-left w-full biblio-input">
+              <i class="pi pi-user"></i>
+              <input pInputText type="text" placeholder="Doe" class="w-full"
+                     [(ngModel)]="registerData.nom" name="nom" required />
+            </span>
+          </div>
+          <div class="col-12 md:col-6 field">
+            <label class="biblio-label block mb-2">First name</label>
+            <span class="p-input-icon-left w-full biblio-input">
+              <i class="pi pi-user"></i>
+              <input pInputText type="text" placeholder="John" class="w-full"
+                     [(ngModel)]="registerData.prenom" name="prenom" required />
+            </span>
+          </div>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="field mb-4">
+          <label class="biblio-label block mb-2">Email address</label>
+          <span class="p-input-icon-left w-full biblio-input">
+            <i class="pi pi-envelope"></i>
+            <input pInputText type="email" placeholder="you@example.com" class="w-full"
+                   [(ngModel)]="registerData.email" name="email" required />
+          </span>
+        </div>
+
+        <!-- TELEPHONE -->
+        <div class="field mb-4">
+          <label class="biblio-label block mb-2">Phone number</label>
+          <span class="p-input-icon-left w-full biblio-input">
+            <i class="pi pi-phone"></i>
+            <input pInputText type="tel" placeholder="+213 XX XXX XXXX" class="w-full"
+                   [(ngModel)]="registerData.telephone" name="telephone" />
+          </span>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="field mb-4">
+          <label class="biblio-label block mb-2">Password</label>
+          <span class="p-input-icon-left w-full biblio-input">
+            <i class="pi pi-lock"></i>
+            <input pInputText type="password" placeholder="••••••••" class="w-full"
+                   [(ngModel)]="registerData.motDePasse" name="motDePasse" required />
+          </span>
+        </div>
+
+        <!-- ROLE SELECT -->
+        <div class="field mb-4">
+          <label class="biblio-label block mb-2">Account type</label>
+          <p-selectButton
+            [options]="roles"
+            [(ngModel)]="selectedRole"
+            optionLabel="label"
+            optionValue="value"
+            name="role"
+            class="biblio-select-btn w-full">
+          </p-selectButton>
+        </div>
+
+        <!-- ✅ BIBLIOTHECAIRE FIELDS — only shown when role is BIBLIOTHECAIRE -->
+        <div *ngIf="selectedRole === 'BIBLIOTHECAIRE'" class="bibliothecaire-section mb-4">
+
+          <div class="biblio-section-title mb-3">
+            <i class="pi pi-id-card mr-2"></i>
+            Bibliothecaire Information
+          </div>
+
+          <!-- MATRICULE -->
+          <div class="field mb-4">
+            <label class="biblio-label block mb-2">Matricule</label>
+            <span class="p-input-icon-left w-full biblio-input">
+              <i class="pi pi-hashtag"></i>
+              <input pInputText type="text" placeholder="BIB-001" class="w-full"
+                     [(ngModel)]="registerData.matricule" name="matricule"
+                     [required]="selectedRole === 'BIBLIOTHECAIRE'" />
+            </span>
+          </div>
+
+          <!-- SALAIRE -->
+          <div class="field mb-4">
+            <label class="biblio-label block mb-2">Salaire (DZD)</label>
+            <span class="p-input-icon-left w-full biblio-input">
+              <i class="pi pi-dollar"></i>
+              <input pInputText type="number" placeholder="50000" class="w-full"
+                     [(ngModel)]="registerData.salaire" name="salaire"
+                     [required]="selectedRole === 'BIBLIOTHECAIRE'" />
+            </span>
+          </div>
+
+        </div>
+
+        <!-- DIVIDER -->
+        <hr class="biblio-divider mt-2" />
+
+        <!-- REGISTER BUTTON -->
+        <button pButton pRipple type="submit"
+                label="Create Account"
+                icon="pi pi-user-plus" iconPos="right"
+                class="w-full biblio-btn mb-3"
+                [disabled]="f.invalid">
+        </button>
+
+        <!-- BACK TO LOGIN -->
+        <button pButton pRipple type="button"
+                label="Already have an account? Sign in"
+                icon="pi pi-arrow-left" iconPos="left"
+                class="w-full biblio-btn-ghost"
+                [routerLink]="['/login']">
+        </button>
+
+      </form>
+
+      <ng-template pTemplate="footer">
+        <div class="text-center pb-2" style="color: var(--biblio-slate); font-size: 0.8rem;">
+          <i class="pi pi-shield mr-1" style="color: var(--biblio-amber);"></i>
+          Secured · Biblio Management System
+        </div>
+      </ng-template>
+
+    </p-card>
+  </div>
 </div>

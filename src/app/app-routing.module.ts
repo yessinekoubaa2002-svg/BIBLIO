@@ -13,6 +13,7 @@ import { CreateBibComponent } from './features/admin/create-bib/create-bib.compo
 import { CreateLivreComponent } from './features/admin/create-livre/create-livre.component';
 import { CategoryManagementComponent } from './features/admin/category-management/category-management.component';
 import { CategoryCategoryComponent } from './features/admin/create-category/create-category.component';
+import { BookManagementComponent } from './features/admin/book-management/book-management.component';
 
 import { UserDashboardComponent } from './features/user/user-dashboard/user-dashboard.component';
 import { DashboardComponent } from './features/bibliothecaire/dashboard/dashboard.component';
@@ -20,68 +21,61 @@ import { BookListComponent } from './features/books/book-list/book-list.componen
 
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
-import { BookManagementComponent } from './features/admin/book-management/book-management.component';
+import { MyLoansComponent } from './features/user/my-loans/my-loans.component';
 
 const routes: Routes = [
 
   // AUTH
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login',    component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 
-  // ── ADMIN ───────────────────────────────
+  // ── ADMIN ─────────────────────────────────────
   {
     path: 'admin',
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'ADMIN' },
     children: [
-
-      { path: '', component: AdminDashboardComponent },
-
-      // users
-      { path: 'users', component: UserManagementComponent },
-      { path: 'users/new', component: UserFormComponent },
-      { path: 'users/create', component: CreateUserComponent },
-      { path: 'users/edit/:id', component: CreateUserComponent },
-
-      // bibliothecaires
-      { path: 'bibliothecaires', component: BibliothecaireManagementComponent },
-      { path: 'bibliothecaires/create', component: CreateBibComponent },
-      { path: 'bibliothecaires/edit/:id', component: CreateBibComponent },
-
-      // livres
-      { path: 'livres', component: BookManagementComponent },
-      { path: 'livres/create', component: CreateLivreComponent },
-      { path: 'livres/edit/:id', component: CreateLivreComponent },
-
-      // categories
-      { path: 'categories', component: CategoryManagementComponent },
-      { path: 'categories/create', component: CategoryCategoryComponent },
-      { path: 'categories/edit/:id', component: CategoryCategoryComponent }
+      { path: '',                        component: AdminDashboardComponent },
+      { path: 'users',                   component: UserManagementComponent },
+      { path: 'users/new',               component: UserFormComponent },
+      { path: 'users/create',            component: CreateUserComponent },
+      { path: 'users/edit/:id',          component: CreateUserComponent },
+      { path: 'bibliothecaires',         component: BibliothecaireManagementComponent },
+      { path: 'bibliothecaires/create',  component: CreateBibComponent },
+      { path: 'bibliothecaires/edit/:id',component: CreateBibComponent },
+      { path: 'livres',                  component: BookManagementComponent },
+      { path: 'livres/create',           component: CreateLivreComponent },
+      { path: 'livres/edit/:id',         component: CreateLivreComponent },
+      { path: 'categories',              component: CategoryManagementComponent },
+      { path: 'categories/create',       component: CategoryCategoryComponent },
+      { path: 'categories/edit/:id',     component: CategoryCategoryComponent }
     ]
   },
 
-  // ── BIBLIOTHECAIRE ───────────────────────
+  // ── BIBLIOTHECAIRE ─────────────────────────────
   {
-    path: 'biblio',
-    component: DashboardComponent,
-    canActivate: [AuthGuard, RoleGuard],
-    data: { role: 'BIBLIOTHECAIRE' }
-  },
+  path: 'bibliothecaire',
+  canActivate: [AuthGuard, RoleGuard],
+  data: { role: 'BIBLIOTHECAIRE' },
+  children: [
+    { path: '', component: DashboardComponent },
+    { path: 'livres', component: BookListComponent },
 
-  // ── USER ────────────────────────────────
+    // 🔥 ADD THIS
+    { path: 'emprunts', component: MyLoansComponent }
+  ]
+},
+  // ── USER ───────────────────────────────────────
   {
     path: 'user',
-    component: UserDashboardComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { role: 'USER' }
-  },
-
-  // ── BOOKS (public with auth) ─────────────
-  {
-    path: 'books',
-    component: BookListComponent,
-    canActivate: [AuthGuard]
+    data: { role: 'USER' },
+    children: [
+      { path: '',         component: UserDashboardComponent },
+      { path: 'livres',   component: BookListComponent },   // ✅ /user/livres
+      // { path: 'emprunts', component: UserEmpruntsComponent } // add when ready
+    ]
   },
 
   { path: '**', redirectTo: 'login' }

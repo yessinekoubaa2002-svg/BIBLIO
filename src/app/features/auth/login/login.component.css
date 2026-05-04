@@ -1,0 +1,229 @@
+/* login.component.css
+   Imports the master theme and adds login-specific styles.
+   Make sure biblio-theme.css is imported in styles.css first.
+*/
+
+:host {
+  display: block;
+}
+
+/* ── Page Layout ── */
+.biblio-login-page {
+  background-color: var(--biblio-ink);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Decorative background orbs ── */
+.biblio-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.biblio-orb-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(232, 168, 56, 0.08);
+  top: -100px;
+  right: -100px;
+}
+
+.biblio-orb-2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(15, 52, 96, 0.6);
+  bottom: -80px;
+  left: -80px;
+}
+
+/* ── Card wrapper ── */
+.biblio-card-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 1rem;
+  animation: biblio-fade-up 0.5s ease both;
+}
+
+/* ── Icon circle ── */
+.biblio-icon-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--biblio-amber);
+  color: var(--biblio-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 32px rgba(232, 168, 56, 0.4);
+}
+
+/* ── Title ── */
+.biblio-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--biblio-parchment);
+  letter-spacing: -0.5px;
+}
+
+/* ── Inner card ── */
+.biblio-card-inner {
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+}
+
+.biblio-card-inner .p-card {
+  background: var(--biblio-ink-soft) !important;
+  border: 1px solid var(--biblio-ink-muted) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.biblio-card-inner .p-card .p-card-body {
+  padding: 1.5rem 2rem 1rem !important;
+}
+
+.biblio-card-inner .p-card .p-card-footer {
+  padding: 0 2rem 1.25rem !important;
+}
+
+/* ── Card header ── */
+.biblio-card-header {
+  border-bottom: 1px solid var(--biblio-ink-muted);
+}
+
+/* ── Labels ── */
+.biblio-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--biblio-slate);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* ── Inputs ── */
+.biblio-input .p-inputtext {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid var(--biblio-ink-muted) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--biblio-parchment) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.95rem !important;
+  padding: 0.85rem 1rem 0.85rem 2.75rem !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.biblio-input .p-inputtext::placeholder {
+  color: var(--biblio-slate) !important;
+}
+
+.biblio-input .p-inputtext:focus {
+  border-color: var(--biblio-amber) !important;
+  box-shadow: 0 0 0 3px var(--biblio-amber-glow) !important;
+}
+
+.biblio-input .p-input-icon-left > i {
+  color: var(--biblio-amber);
+}
+
+/* ── Forgot link ── */
+.biblio-link {
+  color: var(--biblio-amber);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+  transition: color 0.15s ease;
+}
+
+.biblio-link:hover {
+  color: var(--biblio-amber-light);
+}
+
+/* ── Button ── */
+.biblio-btn.p-button {
+  background: var(--biblio-amber) !important;
+  border: none !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--biblio-ink) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.4px;
+  padding: 0.9rem 1.5rem !important;
+  box-shadow: var(--shadow-btn) !important;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.biblio-btn.p-button:hover {
+  background: var(--biblio-amber-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(232, 168, 56, 0.5) !important;
+}
+
+.biblio-btn.p-button:active {
+  background: var(--biblio-amber-dark) !important;
+  transform: translateY(0);
+}
+
+/* ── Divider ── */
+.biblio-divider {
+  border: none;
+  border-top: 1px solid var(--biblio-ink-muted);
+  margin: 1.25rem 0;
+}
+
+/* ── Badge ── */
+.biblio-badge {
+  background: var(--biblio-amber-glow);
+  color: var(--biblio-amber);
+  border: 1px solid rgba(232, 168, 56, 0.3);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  padding: 0.25rem 0.85rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+/* ── Ghost Button (Register) ── */
+.biblio-btn-ghost.p-button {
+  background: transparent !important;
+  border: 1px solid var(--biblio-ink-muted) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--biblio-parchment) !important;
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+  font-size: 0.95rem !important;
+  padding: 0.85rem 1.5rem !important;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease !important;
+}
+
+.biblio-btn-ghost.p-button:hover {
+  border-color: var(--biblio-amber) !important;
+  color: var(--biblio-amber) !important;
+  background: var(--biblio-amber-glow) !important;
+}
+
+.biblio-btn-ghost.p-button .p-button-icon {
+  color: var(--biblio-amber) !important;
+}
+
+/* ── Entrance animation ── */
+@keyframes biblio-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

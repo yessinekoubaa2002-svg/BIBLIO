@@ -1,100 +1,183 @@
-<div class="container mt-4">
+<div class="biblio-dashboard p-4">
 
-  <h2 class="text-center mb-4">Books Library</h2>
+  <!-- ================= HEADER ================= -->
+  <p-card styleClass="mb-4 shadow-2 border-round-xl">
 
-  <div class="row mb-3">
-    <div class="col-md-4">
-      <input type="text" class="form-control"
-        placeholder="Search by title..."
-        [(ngModel)]="searchText"
-        (keyup.enter)="searchByTitle()">
+    <div class="flex justify-content-between align-items-center">
+
+      <div>
+        <h2 class="text-2xl font-bold m-0">Books Library</h2>
+        <p class="text-500 mt-1">Browse, search and borrow books</p>
+      </div>
+
+      <i class="pi pi-book text-4xl text-primary"></i>
+
     </div>
-    <div class="col-md-2">
-      <button class="btn btn-primary w-100" (click)="searchByTitle()">
-        Title
+
+  </p-card>
+
+  <!-- ================= SEARCH SECTION ================= -->
+  <p-card styleClass="mb-4 shadow-2 border-round-xl">
+
+    <div class="grid">
+
+      <!-- Search by Title -->
+      <div class="col-12 md:col-4">
+        <input pInputText
+               type="text"
+               class="w-full"
+               placeholder="Search by title..."
+               [(ngModel)]="searchText"
+               (keyup.enter)="searchByTitle()" />
+      </div>
+
+      <div class="col-12 md:col-2">
+        <button pButton
+                label="Title"
+                icon="pi pi-search"
+                class="w-full"
+                (click)="searchByTitle()">
+        </button>
+      </div>
+
+      <!-- Search by Author -->
+      <div class="col-12 md:col-4">
+        <input pInputText
+               type="text"
+               class="w-full"
+               placeholder="Search by author..."
+               [(ngModel)]="authorText"
+               (keyup.enter)="searchByAuthor()" />
+      </div>
+
+      <div class="col-12 md:col-2">
+        <button pButton
+                label="Author"
+                icon="pi pi-user"
+                class="p-button-secondary w-full"
+                (click)="searchByAuthor()">
+        </button>
+      </div>
+
+      <!-- Filter by Category -->
+      <div class="col-12 md:col-4">
+        <input pInputText
+               type="text"
+               class="w-full"
+               placeholder="Filter by category..."
+               [(ngModel)]="categoryText"
+               (keyup.enter)="filterByCategory()" />
+      </div>
+
+      <div class="col-12 md:col-2">
+        <button pButton
+                label="Category"
+                icon="pi pi-tag"
+                class="p-button-info w-full"
+                (click)="filterByCategory()">
+        </button>
+      </div>
+
+    </div>
+
+    <!-- FILTER BUTTONS -->
+    <div class="flex gap-2 flex-wrap mt-4">
+
+      <button pButton
+              label="All"
+              class="p-button-outlined"
+              (click)="loadBooks()">
       </button>
-    </div>
-    <div class="col-md-4">
-      <input type="text" class="form-control"
-        placeholder="Search by author..."
-        [(ngModel)]="authorText"
-        (keyup.enter)="searchByAuthor()">
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-secondary w-100" (click)="searchByAuthor()">
-        Author
+
+      <button pButton
+              label="Available"
+              class="p-button-success p-button-outlined"
+              (click)="filterAvailable()">
       </button>
-    </div>
-  </div>
 
-  <div class="row mb-3">
-    <div class="col-md-4">
-      <input type="text" class="form-control"
-        placeholder="Filter by category..."
-        [(ngModel)]="categoryText"
-        (keyup.enter)="filterByCategory()">
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-info w-100" (click)="filterByCategory()">
-        Category
+      <button pButton
+              label="Low Stock"
+              class="p-button-warning p-button-outlined"
+              (click)="filterLowStock()">
       </button>
+
+      <button pButton
+              label="Reset"
+              class="p-button-secondary p-button-outlined"
+              (click)="resetFilters()">
+      </button>
+
     </div>
-  </div>
 
-  <div class="mb-3 d-flex gap-2">
-    <button class="btn btn-outline-dark" (click)="loadBooks()">
-      All
-    </button>
-    <button class="btn btn-outline-success" (click)="filterAvailable()">
-      Available
-    </button>
-    <button class="btn btn-outline-warning" (click)="filterLowStock()">
-      Low Stock
-    </button>
-    <button class="btn btn-outline-secondary" (click)="resetFilters()">
-      Reset
-    </button>
-  </div>
+  </p-card>
 
-  <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let book of books">
-      <div class="card shadow-sm h-100">
-        <div class="card-body d-flex flex-column">
+  <!-- ================= BOOKS GRID ================= -->
+  <div class="grid">
 
-          <h5 class="fw-bold">{{ book.titre }}</h5>
-          <p class="text-muted">{{ book.auteur }}</p>
-          <p class="text-muted">{{ book.annee }}</p>
+    <div class="col-12 md:col-6 lg:col-4"
+         *ngFor="let book of books">
 
-          <p>
-            Stock:
-            <span [ngClass]="book.quantite > 0 ? 'text-success' : 'text-danger'">
+      <p-card styleClass="shadow-2 border-round-xl h-full">
+
+        <div class="flex flex-column h-full">
+
+          <h3 class="m-0 font-bold">
+            {{ book.titre }}
+          </h3>
+
+          <p class="text-500 mt-2 mb-1">
+            {{ book.auteur }}
+          </p>
+
+          <p class="text-500 m-0">
+            {{ book.annee }}
+          </p>
+
+          <div class="mt-3">
+            <strong>Stock:</strong>
+
+            <span
+              [ngClass]="book.quantite > 0 ? 'text-green-500' : 'text-red-500'">
               {{ book.quantite }}
             </span>
+          </div>
+
+          <div class="mt-3">
+            <p-tag
+              [value]="book.disponible ? 'Disponible' : 'Indisponible'"
+              [severity]="book.disponible ? 'success' : 'danger'">
+            </p-tag>
+          </div>
+
+          <p class="mt-3 text-500">
+            <strong>Category:</strong>
+            {{ book.category?.nom || 'Not defined' }}
           </p>
 
-          <span class="badge mb-2"
-            [ngClass]="book.disponible ? 'bg-success' : 'bg-danger'">
-            {{ book.disponible ? 'Disponible' : 'Indisponible' }}
-          </span>
-
-          <!-- CATEGORY MOVED UNDER DISPO -->
-          <p class="mt-1 text-muted">
-            Category: {{ book.category?.nom || 'Not defined' }}
-          </p>
-
-          <button class="btn btn-primary mt-auto"
-            (click)="borrow(book.id)"
-            [disabled]="book.quantite === 0">
-            Emprunter
+          <button pButton
+                  label="Emprunter"
+                  icon="pi pi-bookmark"
+                  class="mt-auto p-button-primary"
+                  (click)="borrow(book.id)"
+                  [disabled]="book.quantite === 0">
           </button>
 
         </div>
-      </div>
+
+      </p-card>
+
     </div>
 
-    <div class="col-12 text-center text-muted" *ngIf="books.length === 0">
-      No books found.
+    <!-- EMPTY STATE -->
+    <div class="col-12 text-center text-500"
+         *ngIf="books.length === 0">
+
+      <p-card styleClass="shadow-1 border-round-xl">
+        No books found.
+      </p-card>
+
     </div>
+
   </div>
 
 </div>

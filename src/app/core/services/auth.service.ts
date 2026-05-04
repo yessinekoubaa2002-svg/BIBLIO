@@ -10,7 +10,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // ================= LOGIN =================
   login(data: any) {
     return this.http.post<any>(`${this.api}/login`, {
       email: data.email,
@@ -18,26 +17,25 @@ export class AuthService {
     });
   }
 
-  // ================= REGISTER (GENERIC) =================
   register(data: any) {
     return this.http.post<any>(`${this.api}/register`, data);
   }
 
-  // ================= STORAGE =================
   saveToken(token: string) {
     localStorage.setItem("token", token);
   }
 
   saveRole(role: string) {
-    localStorage.setItem("role", role);
-  }
-
-  getRole(): string | null {
-    return localStorage.getItem("role");
+    const cleanRole = role?.replace('ROLE_', '') ?? '';
+    localStorage.setItem("role", cleanRole);
   }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem("token");
+  }
+
+  getRole(): string | null {
+    return localStorage.getItem("role");
   }
 
   logout() {

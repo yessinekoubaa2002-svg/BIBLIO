@@ -1,0 +1,55 @@
+<div class="layout-wrapper">
+
+  <!-- TOPBAR -->
+  <div class="layout-topbar">
+
+    <button pButton 
+            icon="pi pi-bars"
+            class="p-button-text"
+            (click)="sidebarVisible = true">
+    </button>
+
+    <h3 class="ml-2">Biblio System</h3>
+
+    <span class="ml-3">👤 {{ username }}</span>
+
+    <button pButton
+            icon="pi pi-sign-out"
+            label="Logout"
+            class="p-button-text ml-auto"
+            (click)="logout()">
+    </button>
+
+  </div>
+
+  <p-sidebar [(visible)]="sidebarVisible" position="left">
+
+  <div class="sidebar-header">
+    <h3>📚 Menu</h3>
+  </div>
+
+  <ul class="menu">
+    <li *ngFor="let item of items">
+      <a [routerLink]="item.routerLink" 
+         routerLinkActive="active-link"
+         (click)="sidebarVisible = false">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </a>
+    </li>
+  </ul>
+
+</p-sidebar>
+
+  <!-- CONTENT -->
+  <div class="layout-content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="layout-footer">
+    <span>© 2026 Biblio System. All rights reserved.</span>
+    <span class="ml-auto">v1.0.0</span>
+  </div>
+
+</div>
