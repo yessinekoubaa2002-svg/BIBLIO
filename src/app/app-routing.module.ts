@@ -75,6 +75,7 @@ const routes: Routes = [
       { path: '',         component: UserDashboardComponent },
       { path: 'livres',   component: BookListComponent },   // ✅ /user/livres
       // { path: 'emprunts', component: UserEmpruntsComponent } // add when ready
+       { path: 'emprunts', component: MyLoansComponent }
     ]
   },
 
