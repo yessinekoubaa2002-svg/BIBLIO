@@ -22,6 +22,7 @@ import { BookListComponent } from './features/books/book-list/book-list.componen
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 import { MyLoansComponent } from './features/user/my-loans/my-loans.component';
+import { UserEditComponent } from './features/admin/edit-user/edit-user.component';
 
 const routes: Routes = [
 
@@ -40,7 +41,7 @@ const routes: Routes = [
       { path: 'users',                   component: UserManagementComponent },
       { path: 'users/new',               component: UserFormComponent },
       { path: 'users/create',            component: CreateUserComponent },
-      { path: 'users/edit/:id',          component: CreateUserComponent },
+      { path: 'users/edit/:id',          component: UserEditComponent  },
       { path: 'bibliothecaires',         component: BibliothecaireManagementComponent },
       { path: 'bibliothecaires/create',  component: CreateBibComponent },
       { path: 'bibliothecaires/edit/:id',component: CreateBibComponent },

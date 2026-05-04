@@ -45,6 +45,11 @@ import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { MyLoansComponent } from './features/user/my-loans/my-loans.component';
+import { UserEditComponent } from './features/admin/edit-user/edit-user.component';
+// Add these 3 imports at the top
+import { PasswordModule } from 'primeng/password';
+import { DropdownModule } from 'primeng/dropdown';
+import { MessagesModule } from 'primeng/messages';
 
 
 @NgModule({
@@ -75,7 +80,8 @@ import { MyLoansComponent } from './features/user/my-loans/my-loans.component';
     CreateLivreComponent,
     BookManagementComponent,
     AppLayoutComponent,
-    MyLoansComponent
+    MyLoansComponent,
+    UserEditComponent
   ],
 
   imports: [
@@ -92,7 +98,10 @@ import { MyLoansComponent } from './features/user/my-loans/my-loans.component';
     SidebarModule,
     ChartModule,
     TableModule,
-    TagModule
+    TagModule,
+    PasswordModule,
+    DropdownModule,
+    MessagesModule
   ],
 
   providers: [
