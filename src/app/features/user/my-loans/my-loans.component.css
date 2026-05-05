@@ -1,0 +1,195 @@
+/* PAGE */
+.loans-page {
+  padding: 20px;
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.loans-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.loans-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.loans-subtitle {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.loans-count {
+  background: #3b82f6;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* FILTERS */
+.loans-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filter-btn:hover {
+  background: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.filter-btn:active {
+  transform: scale(0.95);
+}
+
+/* LOADING */
+.loans-loading {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.loans-loading i {
+  font-size: 2rem;
+}
+
+.loans-empty {
+  text-align: center;
+  margin-top: 50px;
+  color: #9ca3af;
+}
+
+.loans-empty i {
+  font-size: 3rem;
+}
+
+/* GRID */
+.loans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.loan-card {
+  display: flex;
+  gap: 15px;
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: all 0.25s ease;
+}
+
+.loan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* ICON */
+.loan-book-icon {
+  font-size: 1.8rem;
+  color: #3b82f6;
+}
+
+/* INFO */
+.loan-info {
+  flex: 1;
+}
+
+/* TOP */
+.loan-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loan-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.loan-author {
+  color: #6b7280;
+  margin: 5px 0 10px;
+}
+
+/* DATES */
+.loan-dates {
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+.loan-date-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+/* STATUS */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-returned {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.status-late {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* DAYS LEFT */
+.days-left {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #2563eb;
+}
+
+.days-left.urgent {
+  color: #dc2626;
+  font-weight: 600;
+}

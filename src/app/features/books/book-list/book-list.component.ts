@@ -138,4 +138,5 @@ filterByCategory() {
     next: (res) => this.books = res
   });
 }
+
 }

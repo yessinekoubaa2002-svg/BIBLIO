@@ -27,9 +27,13 @@ export class MyLoansComponent implements OnInit {
   ngOnInit(): void {
     this.empruntService.getMyEmprunts().subscribe({
       next: (data) => {
+        console.log("🔥 EMPRUNTS FROM BACK:", data); // ✅ ADD THIS
         this.emprunts = data;
         this.filtered = data;
         this.loading = false;
+        
+  
+
       },
       error: (err) => {
         console.error(err);

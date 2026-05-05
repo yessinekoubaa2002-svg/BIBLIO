@@ -1,94 +1,90 @@
-<div class="container mt-4">
+<div class="books-page">
 
-  <h2 class="text-center mb-4">📚 Books Library</h2>
+  <!-- HEADER -->
+  <div class="books-header">
+    <h2>📚 Books Library</h2>
+  </div>
 
-  <!-- SEARCH SECTION -->
-  <div class="row mb-3">
+  <!-- SEARCH -->
+  <div class="search-bar">
 
-    <div class="col-md-4">
-      <input type="text"
-             class="form-control"
-             placeholder="Search by title..."
-             [(ngModel)]="searchText">
-    </div>
+    <input type="text"
+           placeholder="Search by title..."
+           [(ngModel)]="searchText">
 
-    <div class="col-md-2">
-      <button class="btn btn-primary w-100" (click)="searchByTitle()">
-        🔍 Title
-      </button>
-    </div>
+    <button (click)="searchByTitle()">🔍 Title</button>
 
-    <div class="col-md-3">
-      <input type="text"
-             class="form-control"
-             placeholder="Search by author..."
-             [(ngModel)]="authorText">
-    </div>
+    <input type="text"
+           placeholder="Search by author..."
+           [(ngModel)]="authorText">
 
-    <div class="col-md-3">
-      <button class="btn btn-secondary w-100" (click)="searchByAuthor()">
-        ✍️ Author
-      </button>
-    </div>
+    <button (click)="searchByAuthor()">✍️ Author</button>
+
+    <input type="text"
+           placeholder="Category..."
+           [(ngModel)]="categoryText">
+
+    <button (click)="filterByCategory()">🏷️ Category</button>
 
   </div>
-  <input [(ngModel)]="categoryText" placeholder="Category">
-<button (click)="filterByCategory()">Category</button>
 
   <!-- FILTERS -->
-  <div class="mb-3">
+  <div class="filters">
 
-    <button class="btn btn-outline-dark me-2" (click)="loadBooks()">
-      All
-    </button>
+    <button (click)="loadBooks()">All</button>
 
-    <button class="btn btn-outline-success me-2" (click)="filterAvailable()">
+    <button class="available" (click)="filterAvailable()">
       Available
     </button>
 
-    <button class="btn btn-outline-warning me-2" (click)="filterLowStock()">
+    <button class="low" (click)="filterLowStock()">
       Low Stock
     </button>
 
-    <button class="btn btn-outline-info" (click)="resetFilters()">
+    <button class="reset" (click)="resetFilters()">
       Reset
     </button>
 
   </div>
 
-  <!-- BOOK GRID -->
-  <div class="row">
+  <!-- GRID -->
+  <div class="books-grid">
 
-    <div class="col-md-4 mb-4" *ngFor="let book of books">
+    <div class="book-card" *ngFor="let book of books">
 
-      <div class="card shadow-sm h-100 book-card">
+      <!-- IMAGE -->
+      <div class="book-image">
+        <img [src]="'https://picsum.photos/300/200?random=' + book.id">
+             
+      </div>
 
-        <div class="card-body d-flex flex-column">
+      <!-- CONTENT -->
+      <div class="book-content">
 
-          <h5 class="fw-bold">{{ book.titre }}</h5>
+        <h3>{{ book.titre }}</h3>
 
-          <p class="text-muted">✍️ {{ book.auteur }}</p>
+        <p class="author">✍️ {{ book.auteur }}</p>
 
-          <p>
-            📦 Stock:
-            <span [class.text-success]="book.quantite > 0"
-                  [class.text-danger]="book.quantite == 0">
-              {{ book.quantite }}
-            </span>
-          </p>
+        <p class="category" *ngIf="book.category">
+          🏷️ {{ book.category.nom }}
+        </p>
 
-          <p *ngIf="book.category">
-            🏷️🏷️ {{ book.category.nom }}
-          </p>
-
-          <button class="btn btn-primary mt-auto"
-                  (click)="borrow(book.id)"
-                  [disabled]="book.quantite == 0">
-
-            📖 Emprunter
-          </button>
-
+        <div class="stock">
+          📦 Stock:
+          <span [class.in]="book.quantite > 0"
+                [class.out]="book.quantite == 0">
+            {{ book.quantite }}
+          </span>
         </div>
+
+        <!-- BUTTON -->
+        <button class="borrow-btn"
+                (click)="borrow(book.id)"
+                [disabled]="book.quantite == 0">
+
+          📖 emprunter
+
+        </button>
 
       </div>
 

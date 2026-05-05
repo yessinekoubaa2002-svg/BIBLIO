@@ -23,18 +23,23 @@ export class LoginComponent {
   this.authService.login(this.loginForm).subscribe({
     next: (res: any) => {
 
+      console.log("LOGIN RESPONSE 👉", res); // 🧪 للتأكد
+
       const role = res.role?.replace('ROLE_', '');
 
       this.authService.saveToken(res.token);
       this.authService.saveRole(role);
-      localStorage.setItem('username', res.username || '');
 
-      // 👇 HERE is where navigation happens
+      // ✅ FIX
+      localStorage.setItem('userId', res.id);
+      localStorage.setItem('username', res.nom + ' ' + res.prenom);
+
+      // navigation
       if (role === 'ADMIN') {
         this.router.navigate(['/admin']);
       } 
       else if (role === 'BIBLIOTHECAIRE') {
-        this.router.navigate(['/bibliothecaire']); // ✅ HERE
+        this.router.navigate(['/bibliothecaire']);
       } 
       else {
         this.router.navigate(['/user']);
@@ -45,5 +50,5 @@ export class LoginComponent {
       console.error("LOGIN ERROR", err);
     }
   });
-  }
+}
 }

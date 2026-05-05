@@ -1,39 +1,47 @@
-/* admin-dashboard.component.css */
+/* ============================= */
+/* GLOBAL */
+/* ============================= */
 
-:host { display: block; }
+:host {
+  display: block;
+}
 
 .biblio-dashboard {
   min-height: 100vh;
   background-color: var(--biblio-ink);
-  padding: 2.5rem;
+  padding: 2rem;
   font-family: var(--font-body);
 }
 
-/* ── Header ── */
+/* ============================= */
+/* HEADER */
+/* ============================= */
+
 .dash-title {
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 700;
   color: var(--biblio-parchment);
-  margin: 0 0 4px;
+  margin-bottom: 4px;
 }
 
 .dash-sub {
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   color: var(--biblio-slate);
-  margin: 0;
 }
 
-/* ── Nav buttons ── */
+/* ============================= */
+/* NAV BUTTONS */
+/* ============================= */
+
 .dash-nav-btn.p-button {
   background: var(--biblio-ink-soft) !important;
   border: 1px solid var(--biblio-ink-muted) !important;
   border-radius: var(--radius-md) !important;
   color: var(--biblio-parchment) !important;
-  font-family: var(--font-body) !important;
-  font-size: 0.875rem !important;
-  padding: 0.6rem 1.1rem !important;
-  transition: all 0.15s ease !important;
+  font-size: 0.85rem !important;
+  padding: 0.6rem 1rem !important;
+  transition: all 0.2s ease !important;
 }
 
 .dash-nav-btn.p-button:hover {
@@ -42,66 +50,60 @@
   background: rgba(232, 168, 56, 0.08) !important;
 }
 
-.dash-nav-btn.p-button .p-button-icon {
+.dash-nav-btn .p-button-icon {
   color: var(--biblio-amber) !important;
 }
 
-/* ── Stat cards ── */
+/* ============================= */
+/* STAT CARDS */
+/* ============================= */
+
 .stat-card {
   background: var(--biblio-ink-soft);
   border: 1px solid var(--biblio-ink-muted);
   border-radius: var(--radius-lg);
-  padding: 1.75rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  padding: 1.4rem;
+  transition: 0.2s;
   height: 100%;
 }
 
 .stat-card:hover {
   border-color: var(--biblio-amber);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
 .stat-card__icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
 }
 
 .stat-card__value {
   font-family: var(--font-display);
-  font-size: 2.8rem;
+  font-size: 2.3rem;
   font-weight: 700;
   color: var(--biblio-parchment);
-  line-height: 1;
 }
 
 .stat-card__label {
-  font-size: 0.78rem;
-  font-weight: 500;
+  font-size: 0.75rem;
   color: var(--biblio-slate);
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.5px;
 }
 
-/* ── Divider ── */
-.dash-divider {
-  border: none;
-  border-top: 1px solid var(--biblio-ink-muted);
-}
+/* ============================= */
+/* MINI STATS */
+/* ============================= */
 
-/* ── Mini stats ── */
 .mini-stat {
   background: var(--biblio-ink-soft);
   border: 1px solid var(--biblio-ink-muted);
   border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
+  padding: 0.9rem 1.2rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  transition: border-color 0.15s ease;
+  transition: 0.2s;
 }
 
 .mini-stat:hover {
@@ -109,40 +111,108 @@
 }
 
 .mini-stat i {
-  font-size: 1.3rem;
-  flex-shrink: 0;
+  font-size: 1.2rem;
 }
 
 .mini-stat__label {
-  display: block;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--biblio-slate);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .mini-stat__value {
-  display: block;
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--biblio-parchment);
-  line-height: 1.2;
-}
-.stat-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-p-chart {
-  display: block;
-  height: 250px;
+/* ============================= */
+/* DIVIDER */
+/* ============================= */
+
+.dash-divider {
+  border-top: 1px solid var(--biblio-ink-muted);
+  margin: 1.5rem 0;
 }
-.card {
-  background: white;
-  border-radius: 12px;
+
+/* ============================= */
+/* CHART CARDS */
+/* ============================= */
+
+.chart-card {
+  background: var(--biblio-ink-soft);
+  border: 1px solid var(--biblio-ink-muted);
+  border-radius: var(--radius-lg);
   padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: 0.2s;
+  height: 280px; /* 🔥 التحكم في الحجم */
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-card:hover {
+  border-color: var(--biblio-amber);
+}
+
+.chart-card h3 {
+  font-size: 0.9rem;
+  color: var(--biblio-slate);
+  margin-bottom: 0.5rem;
+}
+
+/* ============================= */
+/* CHART SIZE CONTROL 🔥 */
+/* ============================= */
+
+.chart-container {
+  flex: 1;
+  height: 220px;
+}
+
+.chart-container p-chart {
+  display: block;
+  height: 100% !important;
+}
+
+.chart-container canvas {
+  max-height: 200px !important;
+}
+
+/* ============================= */
+/* GENERIC CARD (fallback) */
+/* ============================= */
+
+.card {
+  background: var(--biblio-ink-soft);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  border: 1px solid var(--biblio-ink-muted);
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  .biblio-dashboard {
+    padding: 1rem;
+  }
+
+  .dash-title {
+    font-size: 1.6rem;
+  }
+
+  .chart-card {
+    height: 240px;
+  }
+
+  .chart-container {
+    height: 180px;
+  }
+
+  .chart-container canvas {
+    max-height: 160px !important;
+  }
 }

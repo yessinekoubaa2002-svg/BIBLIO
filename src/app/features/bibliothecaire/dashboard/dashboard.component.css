@@ -1,0 +1,135 @@
+/* TITLE */
+.page-title {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+/* TABLE CONTAINER */
+.table-container {
+  background: white;
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  overflow-x: auto;
+}
+
+/* TABLE */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* HEADER */
+.custom-table thead {
+  background: #f1f5f9;
+}
+
+.custom-table th {
+  padding: 14px;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+}
+
+/* ROWS */
+.table-row {
+  transition: 0.2s;
+}
+
+.table-row:hover {
+  background: #f8fafc;
+}
+
+/* CELLS */
+.custom-table td {
+  padding: 14px;
+  font-size: 0.9rem;
+  color: #334155;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* USER + BOOK */
+.user-cell {
+  font-weight: 500;
+}
+
+.book-cell {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* STATUS BADGE */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-valid {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-returned {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+/* ACTIONS */
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+/* BUTTONS */
+.btn-validate {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-validate:hover {
+  transform: scale(1.05);
+}
+
+.btn-retour {
+  background: linear-gradient(135deg, #facc15, #eab308);
+  border: none;
+  color: #1e293b;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-retour:hover {
+  transform: scale(1.05);
+}
+
+/* DISABLED */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* EMPTY */
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  color: #94a3b8;
+}

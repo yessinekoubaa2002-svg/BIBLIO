@@ -3,7 +3,8 @@ import { EmpruntService } from 'src/app/core/services/emprunt.service';
 
 @Component({
   selector: 'app-biblio-dashboard',
-  templateUrl: './dashboard.component.html'
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 
@@ -11,11 +12,11 @@ export class DashboardComponent implements OnInit {
 
   constructor(private empruntService: EmpruntService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.load();
   }
 
-  load() {
+  load(): void {
     this.empruntService.getAll().subscribe({
       next: (data: any[]) => {
         this.emprunts = data.map(e => ({
@@ -37,7 +38,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  valider(id: number) {
+  valider(id: number): void {
     this.empruntService.validate(id).subscribe({
       next: () => {
         console.log('Emprunt validé');
@@ -47,7 +48,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  retour(id: number) {
+  retour(id: number): void {
     this.empruntService.retour(id).subscribe({
       next: () => {
         console.log('Retour effectué');
