@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CategoryService {
 
-  private baseUrl = 'http://localhost:8081/categories';
+  private baseUrl = 'https://projet-jee-1.onrender.com/categories';
 
   constructor(private http: HttpClient) {}
 

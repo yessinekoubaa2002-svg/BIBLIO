@@ -8,7 +8,7 @@ import { Emprunt } from 'src/app/models/emprunt';
 })
 export class EmpruntService {
 
-  private api = 'http://localhost:8081/emprunts';
+  private api = 'https://projet-jee-1.onrender.com/emprunts';
 
   constructor(private http: HttpClient) {}
 
