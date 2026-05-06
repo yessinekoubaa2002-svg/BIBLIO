@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private baseUrl = 'http://localhost:8081/users';
-  private authUrl = 'http://localhost:8081/auth';
+  private baseUrl = 'https://projet-jee-1.onrender.com/users';
+  private authUrl = 'https://projet-jee-1.onrender.com/auth';
 
   constructor(private http: HttpClient) {}
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface DashboardResponse {
+export interface DashboardResp8081onse {
   totalUsers: number;
   totalBooks: number;
   totalEmprunts: number;
@@ -19,7 +19,7 @@ export interface DashboardResponse {
 })
 export class DashboardService {
 
-  private api = 'http://localhost:8081/admins/dashboard';
+  private api = 'https://projet-jee-1.onrender.com/admins/dashboard';
 
   constructor(private http: HttpClient) {}
 
