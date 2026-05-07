@@ -8,7 +8,7 @@ import { Livre } from 'src/app/models/Livre';
 })
 export class LivreService {
 
-  private api = 'https://projet-jee-1.onrender.com/livres';
+  private api = 'https://projet-jee-j4gl.onrender.com/livres';
 
   constructor(private http: HttpClient) {}
 

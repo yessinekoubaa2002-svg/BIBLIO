@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  private api = "https://projet-jee-1.onrender.com/auth";
+  private api = "https://projet-jee-j4gl.onrender.com/auth";
 
   constructor(private http: HttpClient) {}
 

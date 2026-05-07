@@ -19,13 +19,13 @@ export interface DashboardResp8081onse {
 })
 export class DashboardService {
 
-  private api = 'https://projet-jee-1.onrender.com/admins/dashboard';
+  private api = 'https://projet-jee-j4gl.onrender.com/admins/dashboard';
 
   constructor(private http: HttpClient) {}
 
   // 📊 GET DASHBOARD STATS
   getStats() {
-  return this.http.get<any>('http://localhost:8081/admins/dashboard/stats');
+  return this.http.get<any>('https://projet-jee-j4gl.onrender.com/admins/dashboard/stats');
 }
 
   // 👥 OPTIONAL: roles stats (only if backend exists)
