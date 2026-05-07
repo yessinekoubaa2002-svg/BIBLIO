@@ -16,5 +16,10 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
+<<<<<<< HEAD
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANGULAR_6364A }}
+          projectId: angular-6364a
+=======
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BIBLIO_450E1 }}
           projectId: biblio-450e1
+>>>>>>> e25572eef0a63610504468d2b732f4315cf560a8
